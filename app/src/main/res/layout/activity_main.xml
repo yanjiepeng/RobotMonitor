@@ -110,7 +110,7 @@
                     android:layout_height="wrap_content"
                     android:padding="0dp"
                     android:text="@string/carry"
-                    android:drawableTop="@mipmap/manipulator"
+                    android:drawableTop="@mipmap/car"
                     style="@style/MainTextViewStyle"
                     android:layout_weight="1"/>
 
