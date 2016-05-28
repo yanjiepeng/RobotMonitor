@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorPrimary"
+   >
+
+    <TextClock
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:format24Hour=" HH:mm:ss "
+
+        android:layout_alignParentRight="true"
+        android:textStyle="normal"
+        android:textColor="@color/white"
+        android:layout_marginTop="@dimen/DIMEN_10PX"
+        android:textSize="@dimen/DIMEN_40PX"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:textSize="@dimen/DIMEN_40PX"
+        android:textColor="@color/white"
+        android:layout_marginTop="@dimen/DIMEN_10PX"
+        android:text="@string/title_name"/>
+
+</RelativeLayout>

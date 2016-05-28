@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">RobotMonitor</string>
+    <string name="title_name">明匠机器人监控看板</string>
+    <string name="cut">切割机器人</string>
+    <string name="code">激光刻码</string>
+    <string name="version">视觉检测</string>
+    <string name="AGV">AGV搬运车</string>
+    <string name="weld">焊接机器人</string>
+    <string name="carry">搬运机器人</string>
+    <string name="exception">异常数据监测</string>
+</resources>
