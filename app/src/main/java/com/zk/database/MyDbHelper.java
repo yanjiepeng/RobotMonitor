@@ -10,7 +10,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 public class MyDbHelper extends SQLiteOpenHelper {
 
     Context mContext;
-    String sql = ""; //创建sql语句
+    String sql = "CREATE  TABLE device_task(_id INTEGER PRIMARY KEY , deviceID INTEGER , name VARCHAR, workzone VARCHAR , status VARCHAR , type VARCHAR , time TEXT , period TEXT)"; //创建sql语句
 
     public MyDbHelper(Context context, String name, SQLiteDatabase.CursorFactory factory, int version) {
         super(context, name, factory, version);
@@ -24,6 +24,7 @@ public class MyDbHelper extends SQLiteOpenHelper {
      * */
     @Override
     public void onCreate(SQLiteDatabase db) {
+
         db.execSQL(sql);
     }
 
