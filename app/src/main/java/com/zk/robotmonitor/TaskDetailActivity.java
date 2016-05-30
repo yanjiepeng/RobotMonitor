@@ -1,6 +1,7 @@
 package com.zk.robotmonitor;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -25,6 +26,46 @@ public class TaskDetailActivity extends AppCompatActivity {
 
         initActionBar();
         initWidget();
+        initLeftContent();
+    }
+
+    private void initLeftContent() {
+
+        Intent i = getIntent();
+        int arg = i.getIntExtra("deviceID" , 0);
+        switch (arg) {
+
+            case 1:
+                iv_device_img.setImageResource(R.mipmap.cut);
+                tv_device_name.setText("切割机器人");
+                tv_device_version.setText("MJ-Cut-001");
+                break;
+            case 2:
+                iv_device_img.setImageResource(R.mipmap.code);
+                tv_device_name.setText("激光刻码系统");
+                tv_device_version.setText("MJ-Cut-001");
+                break;
+            case 3:
+                iv_device_img.setImageResource(R.mipmap.camera);
+                tv_device_name.setText("视觉识别系统");
+                tv_device_version.setText("MJ-Cut-001");
+                break;
+            case 4:
+                iv_device_img.setImageResource(R.mipmap.car);
+                tv_device_name.setText("AGV搬运小车");
+                tv_device_version.setText("MJ-Cut-001");
+                break;
+            case 5:
+                iv_device_img.setImageResource(R.mipmap.weld);
+                tv_device_name.setText("焊接机器人");
+                tv_device_version.setText("MJ-Cut-001");
+                break;
+            case 6:
+                iv_device_img.setImageResource(R.mipmap.manipulator);
+                tv_device_name.setText("搬运机器人");
+                tv_device_version.setText("MJ-Cut-001");
+
+        }
     }
 
     private void initActionBar() {
