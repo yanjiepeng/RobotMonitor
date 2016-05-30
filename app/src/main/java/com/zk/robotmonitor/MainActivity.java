@@ -63,6 +63,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.tv_exception_data:
                 startActivity(new Intent(MainActivity.this , ExceptionActivity.class));
                 break;
+
+            case R.id.tv_robot_cut:
+                Intent intent = new Intent(MainActivity.this , TaskDetailActivity.class);
+                intent.putExtra("deviceID" , 1);
+                startActivity(intent);
         }
     }
 }

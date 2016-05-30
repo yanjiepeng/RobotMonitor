@@ -8,7 +8,7 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
-    <style name="MainTextViewStyle" >
+    <style name="MainTextViewStyle">
         <item name="android:layout_gravity">center_vertical</item>
         <item name="android:gravity">bottom|center_horizontal</item>
         <item name="android:textSize">@dimen/DIMEN_42PX</item>
@@ -16,9 +16,23 @@
         <item name="android:layout_marginLeft">@dimen/DIMEN_10PX</item>
         <item name="android:layout_marginBottom">@dimen/DIMEN_20PX</item>
         <item name="android:textColor">@color/black</item>
-</style>
+    </style>
 
+    <style name="textTitleStyle">
+        <item name="android:background">@color/colorPrimary</item>
+        <item name="android:textSize">@dimen/DIMEN_40PX</item>
+        <item name="android:layout_marginBottom">@dimen/DIMEN_5PX</item>
+        <item name="android:gravity">center_horizontal</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
 
+    <style name="headerStyle">
+
+    <item name="android:layout_marginTop">@dimen/DIMEN_5PX</item>
+    <item name="android:layout_marginBottom">@dimen/DIMEN_5PX</item>
+    <item name="android:textSize">@dimen/DIMEN_24PX</item>
+    <item name="android:textColor">@color/header_color</item>
+    </style>
 
 
 </resources>
