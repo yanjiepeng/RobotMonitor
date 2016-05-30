@@ -97,6 +97,8 @@
             android:layout_height="@dimen/DIMEN_60PX"
             android:text="@string/taskInfo" />
 
+        <include layout="@layout/list_header" />
+
         <ListView
             android:id="@+id/lv_task_info"
             android:layout_width="match_parent"

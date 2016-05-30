@@ -34,5 +34,14 @@
     <item name="android:textColor">@color/header_color</item>
     </style>
 
+    <style name="listItemStyle">
+        <item name="android:gravity">center</item>
+        <item name="android:textSize">@dimen/DIMEN_25PX</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:layout_marginTop">@dimen/DIMEN_5PX</item>
+        <item name="android:layout_marginBottom">@dimen/DIMEN_5PX</item>
+
+    </style>
+
 
 </resources>

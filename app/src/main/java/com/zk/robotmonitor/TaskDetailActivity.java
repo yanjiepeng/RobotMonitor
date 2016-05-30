@@ -8,16 +8,24 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ArrayAdapter;
+import android.widget.AbsListView;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
-public class TaskDetailActivity extends AppCompatActivity {
+import com.zk.adapter.TaskItemAdapter;
+import com.zk.bean.Taskbean;
+import com.zk.database.DataService;
+
+import java.util.List;
+
+public class TaskDetailActivity extends AppCompatActivity implements AbsListView.OnScrollListener {
 
     private ListView lv_task_detail;
     private TextView tv_device_name , tv_device_version;
     private ImageView iv_device_img;
+    private List<Taskbean> data ;
+    int arg;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,7 +40,7 @@ public class TaskDetailActivity extends AppCompatActivity {
     private void initLeftContent() {
 
         Intent i = getIntent();
-        int arg = i.getIntExtra("deviceID" , 0);
+        arg = i.getIntExtra("deviceID" , 0);
         switch (arg) {
 
             case 1:
@@ -66,6 +74,23 @@ public class TaskDetailActivity extends AppCompatActivity {
                 tv_device_version.setText("MJ-Cut-001");
 
         }
+        // LayoutInflater lif = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+
+        // View headerView = lif.inflate(R.layout.list_header, lv_task_detail, false);
+
+
+        //------------------------------------------------------------
+        DataService ds = new DataService(MainActivity.sqldb);
+        data =  ds.getData(arg);
+        //------------------------------------------------------------
+
+        //lv_task_detail.addHeaderView(headerView);
+
+        TaskItemAdapter mAdapter = new TaskItemAdapter(TaskDetailActivity.this ,data);
+
+        lv_task_detail.setAdapter(mAdapter);
+
+        lv_task_detail.setOnScrollListener(this);
     }
 
     private void initActionBar() {
@@ -98,19 +123,16 @@ public class TaskDetailActivity extends AppCompatActivity {
         iv_device_img = (ImageView) findViewById(R.id.iv_device_img);
         tv_device_name = (TextView) findViewById(R.id.tv_device_name);
         tv_device_version = (TextView) findViewById(R.id.tv_device_version);
-
-        LayoutInflater lif = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-
-        View headerView = lif.inflate(R.layout.list_header, lv_task_detail, false);
+    }
 
 
-        String[] data = {"google","amazon","facebook"};
+    @Override
+    public void onScrollStateChanged(AbsListView view, int scrollState) {
 
-        lv_task_detail.addHeaderView(headerView);
+    }
 
-        ArrayAdapter mAdapter = new ArrayAdapter(this , android.R.layout.simple_list_item_1,data);
-
-        lv_task_detail.setAdapter(mAdapter);
+    @Override
+    public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
 
     }
 }

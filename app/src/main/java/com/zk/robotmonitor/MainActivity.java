@@ -1,6 +1,7 @@
 package com.zk.robotmonitor;
 
 import android.app.ActionBar;
+import android.content.ContentValues;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.drawable.Drawable;
@@ -13,21 +14,39 @@ import com.zk.database.MyDbHelper;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
-    private TextView tv_robot_cut , tv_robot_code , tv_robot_weld , tv_robot_carry , tv_robot_check , tv_robot_agv , tv_data_exception;
+    private TextView tv_robot_cut, tv_robot_code, tv_robot_weld, tv_robot_carry, tv_robot_check, tv_robot_agv, tv_data_exception;
 
     public String DB_NAME = "mjrobot.db";
     public int DB_VERSION = 1;
-    SQLiteDatabase sqldb;
+    public static SQLiteDatabase sqldb;
     MyDbHelper helper;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        helper = new MyDbHelper(this , DB_NAME , null , DB_VERSION);
+        helper = new MyDbHelper(this, DB_NAME, null, DB_VERSION);
         sqldb = helper.getWritableDatabase();  // 通过helper的getWritableDatabase()得到SQLiteOpenHelper所创建的数据库
 
         initActionBar();
         initWidget();
+
+        //insertData();
+    }
+
+    private void insertData() {
+        ContentValues values = new ContentValues();
+        for (int i = 0; i <2; i++) {
+            values.put("deviceID", "1");
+            values.put("name","切割机器人");
+            values.put("workzone", "工位2");
+            values.put("status", "异常");
+
+            values.put("type", "工件a");
+            values.put("time", "2016-05-30 16:14:07");
+            values.put("period", "2016-05-30 16:14:26");
+            sqldb.insert("device_task", "_id", values);
+        }
     }
 
     private void initWidget() {
@@ -70,37 +89,37 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         switch (v.getId()) {
 
             case R.id.tv_exception_data:
-                startActivity(new Intent(MainActivity.this , ExceptionActivity.class));
+                startActivity(new Intent(MainActivity.this, ExceptionActivity.class));
                 break;
 
             case R.id.tv_robot_cut:
-                Intent intent1 = new Intent(MainActivity.this , TaskDetailActivity.class);
-                intent1.putExtra("deviceID" , 1);
+                Intent intent1 = new Intent(MainActivity.this, TaskDetailActivity.class);
+                intent1.putExtra("deviceID", 1);
                 startActivity(intent1);
                 break;
             case R.id.tv_robot_code:
-                Intent intent2 = new Intent(MainActivity.this , TaskDetailActivity.class);
+                Intent intent2 = new Intent(MainActivity.this, TaskDetailActivity.class);
                 intent2.putExtra("deviceID", 2);
                 startActivity(intent2);
                 break;
-            case R.id.tv_camera_check  :
-                Intent intent3 = new Intent(MainActivity.this , TaskDetailActivity.class);
+            case R.id.tv_camera_check:
+                Intent intent3 = new Intent(MainActivity.this, TaskDetailActivity.class);
                 intent3.putExtra("deviceID", 3);
                 startActivity(intent3);
                 break;
             case R.id.tv_agv_car:
-                Intent intent4 = new Intent(MainActivity.this , TaskDetailActivity.class);
-                intent4.putExtra("deviceID",4);
+                Intent intent4 = new Intent(MainActivity.this, TaskDetailActivity.class);
+                intent4.putExtra("deviceID", 4);
                 startActivity(intent4);
                 break;
             case R.id.tv_robot_weld:
-                Intent intent5 = new Intent(MainActivity.this , TaskDetailActivity.class);
-                intent5.putExtra("deviceID",5);
+                Intent intent5 = new Intent(MainActivity.this, TaskDetailActivity.class);
+                intent5.putExtra("deviceID", 5);
                 startActivity(intent5);
                 break;
             case R.id.tv_robot_carry:
-                Intent intent6 = new Intent(MainActivity.this , TaskDetailActivity.class);
-                intent6.putExtra("deviceID",6);
+                Intent intent6 = new Intent(MainActivity.this, TaskDetailActivity.class);
+                intent6.putExtra("deviceID", 6);
                 startActivity(intent6);
                 break;
         }
