@@ -16,7 +16,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.zk.adapter.TaskItemAdapter;
-import com.zk.bean.Taskbean;
+import com.zk.bean.taskbean;
 import com.zk.database.DataService;
 
 import java.util.List;
@@ -26,7 +26,7 @@ public class TaskDetailActivity extends AppCompatActivity implements AbsListView
     private ListView lv_task_detail;
     private TextView tv_device_name , tv_device_version;
     private ImageView iv_device_img;
-    private List<Taskbean> data ;
+    private List<taskbean> data ;
     private View loadMoreView;
    private  TaskItemAdapter mAdapter;
     private int last_index = 102;

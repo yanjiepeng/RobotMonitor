@@ -31,7 +31,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         initActionBar();
         initWidget();
 
-        //insertData();
+//        insertData();
     }
 
     private void insertData() {

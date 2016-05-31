@@ -4,18 +4,39 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.widget.ListView;
+
+import com.zk.adapter.TaskItemAdapter;
+import com.zk.bean.taskbean;
+import com.zk.database.DataService;
+
+import java.util.List;
 
 public class ExceptionActivity extends AppCompatActivity {
 
+
+    private ListView lv_exception_data;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_exception);
         initActionBar();
+
+        lv_exception_data = (ListView) findViewById(R.id.lv_exception_data);
+
+        initContent();
+    }
+
+    private void initContent() {
+        List<taskbean> data = new DataService(MainActivity.sqldb).QueryExceptiontData();
+        TaskItemAdapter exceptAdapter = new TaskItemAdapter(ExceptionActivity.this , data) ;
+
+        lv_exception_data.setAdapter(exceptAdapter);
+
+
     }
 
     private void initActionBar() {
-
 
         ActionBar actionBar = getSupportActionBar();
         if(actionBar != null) {

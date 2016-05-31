@@ -9,7 +9,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
-import com.zk.bean.Taskbean;
+import com.zk.bean.taskbean;
 import com.zk.robotmonitor.R;
 
 
@@ -23,8 +23,8 @@ public class TaskItemAdapter extends BaseAdapter {
 
     private Context context;
     private LayoutInflater inflater;
-    private List<Taskbean> list;
-    public TaskItemAdapter(Context context , List<Taskbean> list) {
+    private List<taskbean> list;
+    public TaskItemAdapter(Context context , List<taskbean> list) {
 
         this.context = context;
         this.list = list;
@@ -83,7 +83,7 @@ public class TaskItemAdapter extends BaseAdapter {
 
         //此处进行数据适配
 
-        Taskbean tb = list.get(position % list.size());
+        taskbean tb = list.get(position % list.size());
 
 
         viewHolder.tv_id.setText(tb.getId());
