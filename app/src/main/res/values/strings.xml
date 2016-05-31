@@ -12,5 +12,5 @@
     <string name="taskInfo">加工任务情况</string>
     <string name="device_name">设备名称:</string>
     <string name="device_version">设备型号:</string>
-    <string name="load_more">上拉加载更多</string>
+    <string name="load_more">正在加载</string>
 </resources>
