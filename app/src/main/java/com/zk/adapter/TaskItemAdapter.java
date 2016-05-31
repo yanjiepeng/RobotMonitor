@@ -73,27 +73,32 @@ public class TaskItemAdapter extends BaseAdapter {
             //保存viewholder
             view.setTag(viewHolder);
 
+
         } else {
             view = convertView;
             Log.v("TaskAdapter适配器", "复用");
         }
+
         ViewHolder viewHolder = (ViewHolder) view.getTag();
 
         //此处进行数据适配
 
         Taskbean tb = list.get(position % list.size());
 
+
         viewHolder.tv_id.setText(tb.getId());
         viewHolder.tv_name.setText(tb.getName());
         viewHolder.tv_work_zone.setText(tb.getWorkzone());
         viewHolder.tv_status.setText(tb.getStatus());
-        if (tb.getStatus().equals("异常")) {
-            view.setBackgroundColor(Color.RED);
-        }
+
         viewHolder.tv_type.setText(tb.getType());
         viewHolder.tv_time.setText(tb.getTime());
         viewHolder.tv_period.setText(tb.getPeriod());
-
+        if(tb.getStatus().equals("异常")){
+            viewHolder.tv_status.setBackgroundColor(Color.RED);
+        }else{
+            viewHolder.tv_status.setBackgroundColor(Color.WHITE);
+        }
 
         return view;
 

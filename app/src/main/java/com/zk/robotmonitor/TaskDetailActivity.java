@@ -2,9 +2,11 @@ package com.zk.robotmonitor;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Handler;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -25,6 +27,13 @@ public class TaskDetailActivity extends AppCompatActivity implements AbsListView
     private TextView tv_device_name , tv_device_version;
     private ImageView iv_device_img;
     private List<Taskbean> data ;
+    private View loadMoreView;
+   private  TaskItemAdapter mAdapter;
+    private int last_index = 102;
+    private Handler handler = new Handler();
+    private int visibleLastIndex = 0;   //最后的可视项索引
+    private int visibleItemCount;       // 当前窗口可见项总数
+    DataService ds;
     int arg;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +49,7 @@ public class TaskDetailActivity extends AppCompatActivity implements AbsListView
     private void initLeftContent() {
 
         Intent i = getIntent();
+
         arg = i.getIntExtra("deviceID" , 0);
         switch (arg) {
 
@@ -74,19 +84,17 @@ public class TaskDetailActivity extends AppCompatActivity implements AbsListView
                 tv_device_version.setText("MJ-Cut-001");
 
         }
-        // LayoutInflater lif = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-
-        // View headerView = lif.inflate(R.layout.list_header, lv_task_detail, false);
-
-
+         LayoutInflater lif = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        loadMoreView = lif.inflate(R.layout.load_more, null);
         //------------------------------------------------------------
-        DataService ds = new DataService(MainActivity.sqldb);
-        data =  ds.getData(arg);
+        ds = new DataService(MainActivity.sqldb);
+        data =  ds.getData(arg ,last_index);
+        last_index = Integer.parseInt(data.get(data.size()-1).getId());
         //------------------------------------------------------------
 
-        //lv_task_detail.addHeaderView(headerView);
+        lv_task_detail.addFooterView(loadMoreView);
 
-        TaskItemAdapter mAdapter = new TaskItemAdapter(TaskDetailActivity.this ,data);
+        mAdapter = new TaskItemAdapter(TaskDetailActivity.this ,data);
 
         lv_task_detail.setAdapter(mAdapter);
 
@@ -94,7 +102,6 @@ public class TaskDetailActivity extends AppCompatActivity implements AbsListView
     }
 
     private void initActionBar() {
-
 
         ActionBar actionBar = getSupportActionBar();
         if(actionBar != null) {
@@ -123,16 +130,51 @@ public class TaskDetailActivity extends AppCompatActivity implements AbsListView
         iv_device_img = (ImageView) findViewById(R.id.iv_device_img);
         tv_device_name = (TextView) findViewById(R.id.tv_device_name);
         tv_device_version = (TextView) findViewById(R.id.tv_device_version);
+
     }
 
+
+    /**
+     * 滑动状态改变回调
+     * @param view
+     * @param scrollState
+     */
 
     @Override
     public void onScrollStateChanged(AbsListView view, int scrollState) {
 
+        int itemLastIndex = mAdapter.getCount() - 1; //数据集最后一项的索引
+        int lastIndex = itemLastIndex + 1; //加上footer的总数
+
+        if (scrollState == AbsListView.OnScrollListener.SCROLL_STATE_IDLE && visibleLastIndex == lastIndex)
+            //此时异步加载数据
+
+            Log.i("LOADMORE" , "loading");
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                LoadMoreData();
+                last_index = Integer.parseInt(data.get(data.size() -1).getId());
+            }
+        },1000);
+
+
     }
+
+
 
     @Override
     public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
-
+        this.visibleItemCount = visibleItemCount;
+        visibleLastIndex = firstVisibleItem + visibleItemCount - 1 ;
     }
+
+    //上拉加载
+    private void LoadMoreData() {
+
+        data.clear();
+        data.addAll(ds.getData(arg, last_index));
+        mAdapter.notifyDataSetChanged();
+    }
+
 }

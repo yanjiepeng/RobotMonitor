@@ -18,11 +18,11 @@ public class DataService {
         this.db = db;
     }
 
-    public List<Taskbean> getData(int id) {
+    public List<Taskbean> getData(int id , int last_index) {
         List<Taskbean> data = new ArrayList<Taskbean>();
 
         //从数据库获取数据
-        data = QueryRecentData(id);
+        data = QueryRecentData(id , last_index);
 
 
         return data;
@@ -33,10 +33,10 @@ public class DataService {
      * 此方法是从数据库查询对应设备的任务情况
      * @param id
      */
-    private List<Taskbean> QueryRecentData(int id) {
+    private List<Taskbean> QueryRecentData(int id , int last_index) {
     List<Taskbean> result = new ArrayList<Taskbean>();
         String requestID = id+"";
-        Cursor cursor = db.rawQuery("select * from device_task where deviceID=?",new String[]{id+""});
+        Cursor cursor = db.rawQuery("select * from device_task where deviceID=? and _id < ?",new String[]{id+"" , last_index+20+"" });
         while (cursor.moveToNext()) {
             Taskbean tb = new Taskbean();
 
