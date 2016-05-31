@@ -35,6 +35,8 @@ public class TaskDetailActivity extends AppCompatActivity implements AbsListView
     private int visibleItemCount;       // 当前窗口可见项总数
     DataService ds;
     int arg;
+    private boolean isLastRow;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -86,10 +88,13 @@ public class TaskDetailActivity extends AppCompatActivity implements AbsListView
         }
          LayoutInflater lif = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         loadMoreView = lif.inflate(R.layout.load_more, null);
+        loadMoreView.setVisibility(View.INVISIBLE);
         //------------------------------------------------------------
         ds = new DataService(MainActivity.sqldb);
         data =  ds.getData(arg ,last_index);
-        last_index = Integer.parseInt(data.get(data.size()-1).getId());
+        if (data!=null && data.size()!=0) {
+            last_index = Integer.parseInt(data.get(data.size() - 1).getId());
+        }
         //------------------------------------------------------------
 
         lv_task_detail.addFooterView(loadMoreView);
@@ -146,27 +151,37 @@ public class TaskDetailActivity extends AppCompatActivity implements AbsListView
         int itemLastIndex = mAdapter.getCount() - 1; //数据集最后一项的索引
         int lastIndex = itemLastIndex + 1; //加上footer的总数
 
-        if (scrollState == AbsListView.OnScrollListener.SCROLL_STATE_IDLE && visibleLastIndex == lastIndex)
-            //此时异步加载数据
-
+        //当滚到最后一行且停止滚动时，执行加载
+        if (isLastRow && scrollState == AbsListView.OnScrollListener.SCROLL_STATE_IDLE) {
+            //加载元素
+            loadMoreView.setVisibility(View.VISIBLE);
             Log.i("LOADMORE" , "loading");
-        handler.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                LoadMoreData();
-                last_index = Integer.parseInt(data.get(data.size() -1).getId());
-            }
-        },1000);
+            handler.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    LoadMoreData();
+                    last_index = Integer.parseInt(data.get(data.size() -1).getId());
+                }
+            },1000);
+
+        }
+
+
 
 
     }
-
 
 
     @Override
     public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
         this.visibleItemCount = visibleItemCount;
         visibleLastIndex = firstVisibleItem + visibleItemCount - 1 ;
+
+        //判断是否滚到最后一行
+        if (firstVisibleItem + visibleItemCount == totalItemCount && totalItemCount > 0) {
+
+            isLastRow = true;
+        }
     }
 
     //上拉加载
