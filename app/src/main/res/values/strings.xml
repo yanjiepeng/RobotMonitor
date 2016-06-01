@@ -13,4 +13,16 @@
     <string name="device_name">设备名称:</string>
     <string name="device_version">设备型号:</string>
     <string name="load_more">正在加载</string>
+    <string name="auto_refresh">自动刷新:</string>
+    <string name="charge">AGV冲电站</string>
+    <string name="AGV_power">AGV电量监测</string>
+    <string name="charge_station">充电站监测</string>
+    <string name="voltage">电压:</string>
+    <string name="electricity">电流:</string>
+    <string name="power">功率:</string>
+    <string name="rail_monitor">导轨监测</string>
+    <string name="status">状态:</string>
+    <string name="charging">充电</string>
+    <string name="discharging">放电</string>
+    <string name="battery">电池</string>
 </resources>

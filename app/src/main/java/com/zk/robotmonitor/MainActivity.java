@@ -14,7 +14,7 @@ import com.zk.database.MyDbHelper;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
-    private TextView tv_robot_cut, tv_robot_code, tv_robot_weld, tv_robot_carry, tv_robot_check, tv_robot_agv, tv_data_exception;
+    private TextView tv_robot_cut, tv_robot_code, tv_robot_weld, tv_robot_carry, tv_robot_check, tv_robot_agv, tv_data_exception,tv_agv_charge;
 
     public String DB_NAME = "mjrobot.db";
     public int DB_VERSION = 1;
@@ -58,6 +58,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         tv_robot_check = (TextView) findViewById(R.id.tv_camera_check);
         tv_robot_agv = (TextView) findViewById(R.id.tv_agv_car);
         tv_data_exception = (TextView) findViewById(R.id.tv_exception_data);
+        tv_agv_charge = (TextView) findViewById(R.id.tv_charge);
 
         tv_robot_cut.setOnClickListener(this);
         tv_robot_code.setOnClickListener(this);
@@ -66,6 +67,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         tv_robot_check.setOnClickListener(this);
         tv_robot_agv.setOnClickListener(this);
         tv_data_exception.setOnClickListener(this);
+        tv_agv_charge.setOnClickListener(this);
     }
 
     /**
@@ -121,6 +123,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 Intent intent6 = new Intent(MainActivity.this, TaskDetailActivity.class);
                 intent6.putExtra("deviceID", 6);
                 startActivity(intent6);
+                break;
+            case R.id.tv_charge :
+
+                Intent intent7 = new Intent(MainActivity.this , AgvChargeActivity.class);
+                startActivity(intent7);
                 break;
         }
     }

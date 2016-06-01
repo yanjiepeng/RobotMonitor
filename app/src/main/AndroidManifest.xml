@@ -16,7 +16,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".ExceptionActivity" />
-        <activity android:name=".TaskDetailActivity"></activity>
+        <activity android:name=".TaskDetailActivity" />
+        <activity android:name=".AgvChargeActivity"></activity>
     </application>
 
 </manifest>
