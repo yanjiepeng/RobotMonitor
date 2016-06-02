@@ -295,10 +295,25 @@
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/DIMEN_60PX"
                 android:text="@string/rail_monitor" />
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@mipmap/rail"></RelativeLayout>
+                <AbsoluteLayout
+                    android:id="@+id/layout_rail_preview"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@mipmap/rail">
+
+                    <com.zk.widget.LaunchedBoxView
+                        android:id="@+id/lb_preview"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_x="@dimen/DIMEN_1000PX"
+                        android:layout_y="@dimen/DIMEN_200PX"
+                        >
+                    </com.zk.widget.LaunchedBoxView>
+
+
+                </AbsoluteLayout>
+
+
 
         </LinearLayout>
 

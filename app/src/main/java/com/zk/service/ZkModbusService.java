@@ -112,6 +112,7 @@ public class ZkModbusService extends Service {
             try {
                 Thread.sleep(10 * 1000);
             } catch (Exception ex) {
+
             }
             connectIP();
         }
