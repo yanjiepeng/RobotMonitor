@@ -1,17 +1,37 @@
 package com.zk.robotmonitor;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.widget.TextView;
+
+import com.zk.eventBus.EventAA;
+import com.zk.service.ZkModbusService;
+import com.zk.utils.Config;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 public class AgvChargeActivity extends AppCompatActivity {
 
+    private TextView tv_charge_v;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_agv_charge);
         initActionBar();
+        initWiget();
+        EventBus.getDefault().register(this);
+        Intent intent = new Intent(this, ZkModbusService.class);
+        startService(intent);
     }
+
+    private void initWiget() {
+        tv_charge_v = (TextView) findViewById(R.id.tv_agv_charge_voltage);
+    }
+
     /**
      * 初始化actionbar
      */
@@ -36,5 +56,24 @@ public class AgvChargeActivity extends AppCompatActivity {
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onEventMainThread(EventAA eventAA) {
+
+        if (eventAA.getActionType() == EventAA.ACTION_SEND_MSG) {
+
+                int charge_v = Integer.parseInt(eventAA.getMapMessage().get(Config.Voltage_1));
+                tv_charge_v.setText("电压:"+charge_v+"V");
+        }
+
+
+
+    }
+
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        EventBus.getDefault().unregister(this);
     }
 }
