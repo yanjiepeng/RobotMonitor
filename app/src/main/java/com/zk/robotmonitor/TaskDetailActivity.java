@@ -177,7 +177,9 @@ public class TaskDetailActivity extends AppCompatActivity implements AbsListView
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        timer.cancel();
+        if (timer!=null) {
+            timer.cancel();
+        }
     }
 
     /**
@@ -201,7 +203,9 @@ public class TaskDetailActivity extends AppCompatActivity implements AbsListView
             handler.postDelayed(new Runnable() {
                 @Override
                 public void run() {
+                    //此处请求下一页的数据
                     LoadMoreData();
+
                     last_index = Integer.parseInt(data.get(data.size() - 1).getId());
                 }
             }, 1000);

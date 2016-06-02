@@ -79,7 +79,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         actionBar.setCustomView(R.layout.titlebar);
 
-        actionBar.setIcon(R.mipmap.mjlogo);
+        actionBar.setIcon(R.drawable.mjlogo);
 
         actionBar.setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM | ActionBar.DISPLAY_SHOW_HOME);
 
