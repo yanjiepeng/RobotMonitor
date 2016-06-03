@@ -40,8 +40,8 @@ public class AgvChargeActivity extends AppCompatActivity {
         lb = (LaunchedBoxView) findViewById(R.id.lb_preview);
     }
 
-    /**
-     * 初始化actionbar
+    /*
+      初始化actionbar
      */
     private void initActionBar() {
 
@@ -66,6 +66,9 @@ public class AgvChargeActivity extends AppCompatActivity {
         }
     }
 
+    /*
+        EventBus 自动回调 UI线程
+     */
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onEventMainThread(EventAA eventAA) {
 
@@ -73,7 +76,10 @@ public class AgvChargeActivity extends AppCompatActivity {
 
             int charge_v = Integer.parseInt(eventAA.getMapMessage().get(Config.Voltage_1));
             tv_charge_v.setText("电压:" + charge_v + "V");
+
         }
+
+        //在此处根据下位agv状态更新界面上消息框的位置以及轨道状态
 
     }
 
@@ -84,8 +90,8 @@ public class AgvChargeActivity extends AppCompatActivity {
     }
 
 
-    /**
-     * 消息框左移动画
+    /*
+      消息框左移动画
      */
     private void AminToLeft() {
 
@@ -96,8 +102,8 @@ public class AgvChargeActivity extends AppCompatActivity {
 
     }
 
-    /**
-     * 消息框右移动画
+    /*
+     消息框右移动画
      */
 
     private void AminToRight() {

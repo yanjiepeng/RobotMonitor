@@ -55,4 +55,11 @@ public class LaunchedBoxView extends LinearLayout {
         tv_message_1 = (TextView) view.findViewById(R.id.tv_message_1);
     }
 
+
+    /*
+      设置消息框状态信息
+     */
+    private void setStatusInfo( String msg ) {
+        tv_message_1.setText("状态:" +msg);
+    }
 }

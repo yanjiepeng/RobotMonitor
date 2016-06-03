@@ -131,7 +131,6 @@ public class TaskDetailActivity extends AppCompatActivity implements AbsListView
             actionBar.setDisplayShowHomeEnabled(false);
             actionBar.setTitle("设备详情");
         }
-
     }
 
     @Override
@@ -238,7 +237,6 @@ public class TaskDetailActivity extends AppCompatActivity implements AbsListView
     }
 
     //定时任务
-
     class  SynchroTimerTask extends TimerTask {
 
         @Override

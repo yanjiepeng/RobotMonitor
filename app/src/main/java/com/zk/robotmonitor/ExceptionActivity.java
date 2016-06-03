@@ -28,15 +28,20 @@ public class ExceptionActivity extends AppCompatActivity {
         initContent();
     }
 
+    /*
+        初始化内容
+     */
     private void initContent() {
         List<taskbean> data = new DataService(MainActivity.sqldb).QueryExceptiontData();
         TaskItemAdapter exceptAdapter = new TaskItemAdapter(ExceptionActivity.this, data);
 
         lv_exception_data.setAdapter(exceptAdapter);
 
-
     }
 
+    /*
+        初始化action bar
+     */
     private void initActionBar() {
 
         ActionBar actionBar = getSupportActionBar();
@@ -50,7 +55,9 @@ public class ExceptionActivity extends AppCompatActivity {
 
     }
 
-
+    /*
+        ActionBar的菜单监听
+     */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {

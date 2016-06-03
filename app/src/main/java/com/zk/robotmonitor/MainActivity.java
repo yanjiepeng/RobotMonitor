@@ -34,6 +34,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 //        insertData();
     }
 
+
+     /*
+        模拟插入两个异常数据
+     */
     private void insertData() {
         ContentValues values = new ContentValues();
         for (int i = 0; i < 2; i++) {
@@ -49,6 +53,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
+     /*
+        初始化界面控件
+     */
     private void initWidget() {
 
         tv_robot_cut = (TextView) findViewById(R.id.tv_robot_cut);
@@ -70,8 +77,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         tv_agv_charge.setOnClickListener(this);
     }
 
-    /**
-     * 初始化actionba
+    /*
+       初始化actionbar
      */
     private void initActionBar() {
 
@@ -93,7 +100,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.tv_exception_data:
                 startActivity(new Intent(MainActivity.this, ExceptionActivity.class));
                 break;
-
             case R.id.tv_robot_cut:
                 Intent intent1 = new Intent(MainActivity.this, TaskDetailActivity.class);
                 intent1.putExtra("deviceID", 1);
@@ -125,7 +131,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 startActivity(intent6);
                 break;
             case R.id.tv_charge:
-
                 Intent intent7 = new Intent(MainActivity.this, AgvChargeActivity.class);
                 startActivity(intent7);
                 break;
