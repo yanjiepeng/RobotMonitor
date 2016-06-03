@@ -1,66 +1,64 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:orientation="horizontal"
     android:layout_height="wrap_content"
     android:background="#d7cfcd"
-    >
+    android:orientation="horizontal">
 
     <TextView
-        android:layout_width="0dp"
-        android:layout_weight="1"
-        android:layout_height="wrap_content"
-        android:gravity="center"
         style="@style/headerStyle"
-        android:text="编号"
-        />
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:text="编号" />
+
     <TextView
-        android:layout_width="0dp"
-        android:layout_weight="1"
-        android:layout_height="wrap_content"
-        android:gravity="center"
         style="@style/headerStyle"
-        android:text="简称"
-        />
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:text="简称" />
+
     <TextView
-        android:layout_width="0dp"
-        android:layout_weight="1"
         style="@style/headerStyle"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_weight="1"
         android:gravity="center"
-        android:text="工位"
-        />
+        android:text="工位" />
+
     <TextView
-        android:layout_width="0dp"
-        android:layout_weight="1"
-        android:layout_height="wrap_content"
-        android:gravity="center"
         style="@style/headerStyle"
-        android:text="状态"
-        />
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:text="状态" />
+
     <TextView
-        android:layout_width="0dp"
-        android:layout_weight="1"
-        android:layout_height="wrap_content"
-        android:gravity="center"
         style="@style/headerStyle"
-        android:text="监测类型"
-        />
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:text="监测类型" />
+
     <TextView
-        android:layout_width="0dp"
-        android:layout_weight="1"
-        android:layout_height="wrap_content"
-        android:gravity="center"
         style="@style/headerStyle"
-        android:text="监测时间"
-        />
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:text="监测时间" />
+
     <TextView
-        android:layout_width="0dp"
-        android:layout_weight="1"
-        android:layout_height="wrap_content"
-        android:gravity="center"
         style="@style/headerStyle"
-        android:text="运行时间"
-        />
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:text="运行时间" />
 
 </LinearLayout>

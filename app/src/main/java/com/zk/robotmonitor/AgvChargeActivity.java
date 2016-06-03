@@ -4,11 +4,13 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.animation.TranslateAnimation;
 import android.widget.TextView;
 
 import com.zk.eventBus.EventAA;
 import com.zk.service.ZkModbusService;
 import com.zk.utils.Config;
+import com.zk.widget.LaunchedBoxView;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -17,6 +19,8 @@ import org.greenrobot.eventbus.ThreadMode;
 public class AgvChargeActivity extends AppCompatActivity {
 
     private TextView tv_charge_v;
+    private LaunchedBoxView lb;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -28,8 +32,12 @@ public class AgvChargeActivity extends AppCompatActivity {
         startService(intent);
     }
 
+    /*
+     初始化界面控件
+     */
     private void initWiget() {
         tv_charge_v = (TextView) findViewById(R.id.tv_agv_charge_voltage);
+        lb = (LaunchedBoxView) findViewById(R.id.lb_preview);
     }
 
     /**
@@ -57,23 +65,48 @@ public class AgvChargeActivity extends AppCompatActivity {
                 return super.onOptionsItemSelected(item);
         }
     }
+
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onEventMainThread(EventAA eventAA) {
 
         if (eventAA.getActionType() == EventAA.ACTION_SEND_MSG) {
 
-                int charge_v = Integer.parseInt(eventAA.getMapMessage().get(Config.Voltage_1));
-                tv_charge_v.setText("电压:"+charge_v+"V");
+            int charge_v = Integer.parseInt(eventAA.getMapMessage().get(Config.Voltage_1));
+            tv_charge_v.setText("电压:" + charge_v + "V");
         }
 
-
-
     }
-
 
     @Override
     protected void onPause() {
         super.onPause();
         EventBus.getDefault().unregister(this);
     }
+
+
+    /**
+     * 消息框左移动画
+     */
+    private void AminToLeft() {
+
+        TranslateAnimation ta = new TranslateAnimation(0, -900, 0, 0);
+        ta.setDuration(1500);
+        ta.setFillAfter(true);
+        lb.startAnimation(ta);
+
+    }
+
+    /**
+     * 消息框右移动画
+     */
+
+    private void AminToRight() {
+
+        TranslateAnimation ta = new TranslateAnimation(-900, 0, 0, 0);
+        ta.setDuration(1500);
+        ta.setFillAfter(true);
+        lb.startAnimation(ta);
+
+    }
+
 }

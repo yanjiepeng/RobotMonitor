@@ -7,20 +7,20 @@
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@drawable/corner_no_fill"
         android:layout_gravity="center_horizontal"
+        android:background="@drawable/corner_no_fill"
         android:orientation="vertical">
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingBottom="@dimen/DIMEN_5PX"
-            android:paddingTop="@dimen/DIMEN_5PX"
             android:background="@color/colorPrimary"
             android:gravity="center"
+            android:paddingBottom="@dimen/DIMEN_5PX"
+            android:paddingTop="@dimen/DIMEN_5PX"
             android:text="@string/launched_info"
-            android:textSize="@dimen/DIMEN_32PX"
-            android:textColor="@color/white" />
+            android:textColor="@color/white"
+            android:textSize="@dimen/DIMEN_32PX" />
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -32,21 +32,22 @@
                 android:id="@+id/tv_message_1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:background="@color/skyblue"
                 android:paddingBottom="@dimen/DIMEN_10PX"
                 android:paddingTop="@dimen/DIMEN_10PX"
-                android:background="@color/skyblue"
+                android:text="状态：工作正常"
                 android:textColor="@color/yellow"
-                android:textSize="@dimen/DIMEN_32PX"
-                android:text="状态：工作正常" />
+                android:textSize="@dimen/DIMEN_32PX" />
 
         </LinearLayout>
     </LinearLayout>
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:scaleType="fitXY"
-            android:src="@mipmap/connect_arrow"/>
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:scaleType="fitXY"
+        android:src="@mipmap/connect_arrow" />
 
 
 </LinearLayout>

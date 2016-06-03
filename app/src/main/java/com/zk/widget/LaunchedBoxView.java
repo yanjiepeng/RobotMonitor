@@ -18,15 +18,15 @@ public class LaunchedBoxView extends LinearLayout {
 
     public LaunchedBoxView(Context context) {
         super(context);
-        if(!isInEditMode()){
-           //造成错误的代码段
+        if (!isInEditMode()) {
+            //造成错误的代码段
             init(context);
         }
     }
 
     public LaunchedBoxView(Context context, AttributeSet attrs) {
         super(context, attrs);
-        if(!isInEditMode()){
+        if (!isInEditMode()) {
 //造成错误的代码段
             init(context);
         }
@@ -34,7 +34,7 @@ public class LaunchedBoxView extends LinearLayout {
 
     public LaunchedBoxView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
-        if(!isInEditMode()){
+        if (!isInEditMode()) {
 //造成错误的代码段
             init(context);
         }
@@ -52,7 +52,7 @@ public class LaunchedBoxView extends LinearLayout {
     }
 
     private void initWidget() {
-            tv_message_1 = (TextView) view.findViewById(R.id.tv_message_1);
+        tv_message_1 = (TextView) view.findViewById(R.id.tv_message_1);
     }
 
 }

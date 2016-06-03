@@ -24,7 +24,8 @@ public class TaskItemAdapter extends BaseAdapter {
     private Context context;
     private LayoutInflater inflater;
     private List<taskbean> list;
-    public TaskItemAdapter(Context context , List<taskbean> list) {
+
+    public TaskItemAdapter(Context context, List<taskbean> list) {
 
         this.context = context;
         this.list = list;
@@ -50,7 +51,7 @@ public class TaskItemAdapter extends BaseAdapter {
     public View getView(int position, View convertView, ViewGroup parent) {
         View view = null;
 
-        if(convertView == null) {
+        if (convertView == null) {
             view = inflater.inflate(R.layout.task_list_item, null);
             TextView tv_id = (TextView) view.findViewById(R.id.tv_id);
             TextView tv_type = (TextView) view.findViewById(R.id.tv_type);
@@ -94,9 +95,9 @@ public class TaskItemAdapter extends BaseAdapter {
         viewHolder.tv_type.setText(tb.getType());
         viewHolder.tv_time.setText(tb.getTime());
         viewHolder.tv_period.setText(tb.getPeriod());
-        if(tb.getStatus().equals("异常")){
+        if (tb.getStatus().equals("异常")) {
             viewHolder.tv_status.setBackgroundColor(Color.RED);
-        }else{
+        } else {
             viewHolder.tv_status.setBackgroundColor(Color.WHITE);
         }
 

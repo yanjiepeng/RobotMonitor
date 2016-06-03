@@ -18,35 +18,36 @@
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:orientation="vertical"
             android:layout_marginRight="@dimen/DIMEN_10PX"
-            android:layout_weight="1">
+            android:layout_weight="1"
+            android:orientation="vertical">
 
             <!-- 左上 -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:background="@color/cyan"
                 android:layout_marginBottom="@dimen/DIMEN_10PX"
-                android:layout_weight="1">
+                android:layout_weight="1"
+                android:background="@color/cyan">
 
                 <TextView
                     android:id="@+id/tv_robot_cut"
+                    style="@style/MainTextViewStyle"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:padding="0dp"
-                    android:text="@string/cut"
+                    android:layout_weight="1"
                     android:drawableTop="@mipmap/cut"
-                    style="@style/MainTextViewStyle"
-                    android:layout_weight="1"/>
+                    android:padding="0dp"
+                    android:text="@string/cut" />
+
                 <TextView
                     android:id="@+id/tv_robot_code"
+                    style="@style/MainTextViewStyle"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_weight="1"
                     android:drawableTop="@mipmap/code"
-                    style="@style/MainTextViewStyle"
-                    android:text="@string/code"
-                    android:layout_weight="1"/>
+                    android:text="@string/code" />
 
             </LinearLayout>
 
@@ -54,27 +55,29 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:background="@color/cyan"
                 android:layout_marginTop="@dimen/DIMEN_10PX"
-                android:layout_weight="1">
+                android:layout_weight="1"
+                android:background="@color/cyan">
+
                 <TextView
                     android:id="@+id/tv_robot_weld"
+                    style="@style/MainTextViewStyle"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:padding="0dp"
-                    android:text="@string/weld"
+                    android:layout_weight="1"
                     android:drawableTop="@mipmap/weld"
-                    style="@style/MainTextViewStyle"
-                    android:layout_weight="1"/>
+                    android:padding="0dp"
+                    android:text="@string/weld" />
+
                 <TextView
                     android:id="@+id/tv_robot_carry"
+                    style="@style/MainTextViewStyle"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:padding="0dp"
-                    android:text="@string/carry"
+                    android:layout_weight="1"
                     android:drawableTop="@mipmap/manipulator"
-                    style="@style/MainTextViewStyle"
-                    android:layout_weight="1"/>
+                    android:padding="0dp"
+                    android:text="@string/carry" />
 
             </LinearLayout>
         </LinearLayout>
@@ -83,36 +86,37 @@
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:orientation="vertical"
             android:layout_marginLeft="@dimen/DIMEN_10PX"
-            android:layout_weight="1">
+            android:layout_weight="1"
+            android:orientation="vertical">
 
             <!-- 右上 -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:background="@color/cyan"
                 android:layout_marginBottom="@dimen/DIMEN_10PX"
-                android:layout_weight="1">
+                android:layout_weight="1"
+                android:background="@color/cyan">
 
                 <TextView
                     android:id="@+id/tv_camera_check"
+                    style="@style/MainTextViewStyle"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:drawableTop="@mipmap/video"
                     android:padding="0dp"
-                    android:text="@string/version"
-                    android:drawableTop="@mipmap/camera"
-                    style="@style/MainTextViewStyle"
-                    android:layout_weight="1"/>
+                    android:text="@string/version" />
+
                 <TextView
                     android:id="@+id/tv_agv_car"
+                    style="@style/MainTextViewStyle"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:padding="0dp"
-                    android:text="@string/carry"
+                    android:layout_weight="1"
                     android:drawableTop="@mipmap/car"
-                    style="@style/MainTextViewStyle"
-                    android:layout_weight="1"/>
+                    android:padding="0dp"
+                    android:text="@string/AGV" />
 
             </LinearLayout>
 
@@ -120,31 +124,31 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:background="@color/cyan"
                 android:layout_marginTop="@dimen/DIMEN_10PX"
-                android:layout_weight="1">
+                android:layout_weight="1"
+                android:background="@color/cyan">
 
                 <TextView
                     android:id="@+id/tv_exception_data"
+                    style="@style/MainTextViewStyle"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:padding="0dp"
-                    android:text="@string/exception"
+                    android:layout_weight="1"
                     android:drawableTop="@mipmap/alert"
-                    style="@style/MainTextViewStyle"
-                    android:layout_weight="1"/>
+                    android:padding="0dp"
+                    android:text="@string/exception" />
+
                 <TextView
                     android:id="@+id/tv_charge"
+                    style="@style/MainTextViewStyle"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:padding="0dp"
-                    android:text="@string/charge"
+                    android:layout_weight="1"
                     android:drawableTop="@mipmap/charge"
-                    style="@style/MainTextViewStyle"
-                    android:layout_weight="1"/>
+                    android:padding="0dp"
+                    android:text="@string/charge" />
 
             </LinearLayout>
-
 
 
         </LinearLayout>

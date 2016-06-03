@@ -139,7 +139,9 @@ public class TaskDetailActivity extends AppCompatActivity implements AbsListView
         switch (item.getItemId()) {
             case android.R.id.home:// 点击返回图标事件
                 this.finish();
-                timer.cancel();
+                if (timer !=null ) {
+                    timer.cancel();
+                }
             default:
                 return super.onOptionsItemSelected(item);
         }
@@ -211,7 +213,6 @@ public class TaskDetailActivity extends AppCompatActivity implements AbsListView
             }, 1000);
 
         }
-
 
     }
 

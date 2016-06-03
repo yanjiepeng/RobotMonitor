@@ -5,10 +5,10 @@ package com.zk.bean;
  */
 public class taskbean {
 
-    String id ;
-    String name ;
+    String id;
+    String name;
     String workzone;
-    String status ;
+    String status;
     String type;
     String time;
     String period;

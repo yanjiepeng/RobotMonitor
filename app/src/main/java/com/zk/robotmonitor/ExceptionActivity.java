@@ -16,6 +16,7 @@ public class ExceptionActivity extends AppCompatActivity {
 
 
     private ListView lv_exception_data;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,7 +30,7 @@ public class ExceptionActivity extends AppCompatActivity {
 
     private void initContent() {
         List<taskbean> data = new DataService(MainActivity.sqldb).QueryExceptiontData();
-        TaskItemAdapter exceptAdapter = new TaskItemAdapter(ExceptionActivity.this , data) ;
+        TaskItemAdapter exceptAdapter = new TaskItemAdapter(ExceptionActivity.this, data);
 
         lv_exception_data.setAdapter(exceptAdapter);
 
@@ -39,7 +40,7 @@ public class ExceptionActivity extends AppCompatActivity {
     private void initActionBar() {
 
         ActionBar actionBar = getSupportActionBar();
-        if(actionBar != null) {
+        if (actionBar != null) {
             actionBar.setDisplayShowTitleEnabled(true);
             actionBar.setDisplayHomeAsUpEnabled(true); // 决定左上角图标的右侧是否有向左的小箭头, true
             // 有小箭头，并且图标可以点击

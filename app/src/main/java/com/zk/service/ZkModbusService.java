@@ -31,7 +31,6 @@ public class ZkModbusService extends Service {
     }
 
 
-
     /*
     读板卡线程
      */
@@ -107,7 +106,7 @@ public class ZkModbusService extends Service {
             }
         } catch (Exception e) {
             master.destroy();
-           e.printStackTrace();
+            e.printStackTrace();
 
             try {
                 Thread.sleep(10 * 1000);

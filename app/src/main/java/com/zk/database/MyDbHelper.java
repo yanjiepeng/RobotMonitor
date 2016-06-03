@@ -21,7 +21,7 @@ public class MyDbHelper extends SQLiteOpenHelper {
     /**
      * 当数据库首次创建时执行该方法，一般将创建表等初始化操作放在该方法中执行.
      * 重写onCreate方法，调用execSQL方法创建表
-     * */
+     */
     @Override
     public void onCreate(SQLiteDatabase db) {
 

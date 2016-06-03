@@ -14,7 +14,7 @@ import com.zk.database.MyDbHelper;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
-    private TextView tv_robot_cut, tv_robot_code, tv_robot_weld, tv_robot_carry, tv_robot_check, tv_robot_agv, tv_data_exception,tv_agv_charge;
+    private TextView tv_robot_cut, tv_robot_code, tv_robot_weld, tv_robot_carry, tv_robot_check, tv_robot_agv, tv_data_exception, tv_agv_charge;
 
     public String DB_NAME = "mjrobot.db";
     public int DB_VERSION = 1;
@@ -36,9 +36,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private void insertData() {
         ContentValues values = new ContentValues();
-        for (int i = 0; i <2; i++) {
+        for (int i = 0; i < 2; i++) {
             values.put("deviceID", "1");
-            values.put("name","切割机器人");
+            values.put("name", "切割机器人");
             values.put("workzone", "工位2");
             values.put("status", "异常");
 
@@ -79,7 +79,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         actionBar.setCustomView(R.layout.titlebar);
 
-        actionBar.setIcon(R.drawable.mjlogo);
+        actionBar.setIcon(R.drawable.zklogo);
 
         actionBar.setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM | ActionBar.DISPLAY_SHOW_HOME);
 
@@ -124,9 +124,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 intent6.putExtra("deviceID", 6);
                 startActivity(intent6);
                 break;
-            case R.id.tv_charge :
+            case R.id.tv_charge:
 
-                Intent intent7 = new Intent(MainActivity.this , AgvChargeActivity.class);
+                Intent intent7 = new Intent(MainActivity.this, AgvChargeActivity.class);
                 startActivity(intent7);
                 break;
         }
