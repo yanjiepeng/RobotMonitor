@@ -62,7 +62,6 @@ public class TaskDetailActivity extends AppCompatActivity implements AbsListView
     private void initLeftContent() {
 
         Intent i = getIntent();
-
         arg = i.getIntExtra("deviceID", 0);
         switch (arg) {
 
@@ -100,20 +99,17 @@ public class TaskDetailActivity extends AppCompatActivity implements AbsListView
         LayoutInflater lif = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         loadMoreView = lif.inflate(R.layout.load_more, null);
         loadMoreView.setVisibility(View.INVISIBLE);
-        //------------------------------------------------------------
+        //----------------------------数据准备--------------------------------
         ds = new DataService(MainActivity.sqldb);
         data = ds.getData(arg, last_index);
         if (data != null && data.size() != 0) {
             last_index = Integer.parseInt(data.get(data.size() - 1).getId());
         }
-        //------------------------------------------------------------
+        //----------------------------------------------------------------------
 
         lv_task_detail.addFooterView(loadMoreView);
-
         mAdapter = new TaskItemAdapter(TaskDetailActivity.this, data);
-
         lv_task_detail.setAdapter(mAdapter);
-
         lv_task_detail.setOnScrollListener(this);
     }
 
@@ -157,7 +153,6 @@ public class TaskDetailActivity extends AppCompatActivity implements AbsListView
         tv_device_version = (TextView) findViewById(R.id.tv_device_version);
 
         sw_auto_refresh = (Switch) findViewById(R.id.sw_auto_refresh);
-
         sw_auto_refresh.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
@@ -201,6 +196,7 @@ public class TaskDetailActivity extends AppCompatActivity implements AbsListView
             //加载元素
             loadMoreView.setVisibility(View.VISIBLE);
             Log.i("LOADMORE", "loading");
+            //1秒延时
             handler.postDelayed(new Runnable() {
                 @Override
                 public void run() {
@@ -214,7 +210,6 @@ public class TaskDetailActivity extends AppCompatActivity implements AbsListView
         }
 
     }
-
 
     @Override
     public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
@@ -249,5 +244,4 @@ public class TaskDetailActivity extends AppCompatActivity implements AbsListView
           });
         }
     }
-
 }

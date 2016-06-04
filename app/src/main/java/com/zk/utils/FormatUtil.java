@@ -11,4 +11,13 @@ public class FormatUtil {
         float b = (float) (Math.round(a * 100)) / 100;
         return b;
     }
+
+    //将float保留两位
+    public static float KeepPoint2(float arg) {
+        float b = (float) (Math.round(arg * 100)) / 100;
+        return b;
+    }
+
+
+
 }
