@@ -25,5 +25,7 @@
     <string name="charging">充电</string>
     <string name="discharging">放电</string>
     <string name="battery">电池</string>
+    <string name="battery1">电池1</string>
+    <string name="battery2">电池2</string>
     <string name="launched_info">运行情况</string>
 </resources>

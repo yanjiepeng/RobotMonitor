@@ -174,7 +174,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/DIMEN_20PX"
-                    android:text="@string/charging"
+                    android:text="@string/battery1"
                     android:textColor="@color/red" />
 
                 <TextView
@@ -217,7 +217,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/DIMEN_20PX"
-                    android:text="@string/discharging"
+                    android:text="@string/battery2"
                     android:textColor="@color/red" />
 
                 <TextView
@@ -259,7 +259,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/DIMEN_20PX"
-                    android:text="@string/battery"
+                    android:text="电   量"
                     android:textColor="@color/red" />
 
                 <TextView

@@ -1,6 +1,7 @@
 package com.zk.robotmonitor;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -13,8 +14,6 @@ import com.google.gson.Gson;
 import com.zk.bean.ChargeBean;
 import com.zk.eventBus.EventAA;
 import com.zk.service.ChargeService;
-import com.zk.service.ZkModbusService;
-import com.zk.utils.Config;
 import com.zk.widget.LaunchedBoxView;
 
 import org.greenrobot.eventbus.EventBus;
@@ -23,7 +22,7 @@ import org.greenrobot.eventbus.ThreadMode;
 
 public class AgvChargeActivity extends AppCompatActivity {
 
-    private TextView tv_charge_v;
+    private TextView tv_charge_v, tv_charge_elec, tv_charge_power, tv_charge_status;
     private LaunchedBoxView lb;
     private Gson gson;
 
@@ -37,7 +36,7 @@ public class AgvChargeActivity extends AppCompatActivity {
 
         EventBus.getDefault().register(this);
 
-        Intent intent = new Intent(AgvChargeActivity.this , ChargeService.class);
+        Intent intent = new Intent(AgvChargeActivity.this, ChargeService.class);
         startService(intent);
 
     }
@@ -46,8 +45,11 @@ public class AgvChargeActivity extends AppCompatActivity {
      初始化界面控件
      */
     private void initWiget() {
-        tv_charge_v = (TextView) findViewById(R.id.tv_agv_charge_voltage);
+        tv_charge_v = (TextView) findViewById(R.id.tv_charge_voltage);
         lb = (LaunchedBoxView) findViewById(R.id.lb_preview);
+        tv_charge_elec = (TextView) findViewById(R.id.tv_charge_electricity);
+        tv_charge_power = (TextView) findViewById(R.id.tv_charge_power);
+        tv_charge_status = (TextView) findViewById(R.id.tv_charge_status);
     }
 
     /*
@@ -84,12 +86,12 @@ public class AgvChargeActivity extends AppCompatActivity {
 
         if (eventAA.getActionType() == EventAA.ACTION_SEND_CHARGE) {
 
-           String result = eventAA.getMessage();
+            String result = eventAA.getMessage();
             Log.w("result", result);
             if (result.equals("error")) {
                 Toast.makeText(AgvChargeActivity.this, "网络错误！请检查", Toast.LENGTH_SHORT).show();
-            }else if (result!=null && !result.equals("")) {
-                ChargeBean cb = gson.fromJson(result , ChargeBean.class);
+            } else if (result != null && !result.equals("")) {
+                ChargeBean cb = gson.fromJson(result, ChargeBean.class);
                 UpdataChargeUI(cb);
             }
         }
@@ -100,7 +102,37 @@ public class AgvChargeActivity extends AppCompatActivity {
      此处根据获取的数据对界面进行更新
      */
     private void UpdataChargeUI(ChargeBean cb) {
+        float charge_station_vol, charge_station_elec, charge_station_power, charge_station_status;
 
+        //充电站电压
+        if (cb.getVolSign() > 0)
+            charge_station_vol = (float) (cb.getVoltage() / (Math.pow(10, cb.getVolDecimals())));
+        else
+            charge_station_vol = 0 - (float) (cb.getVoltage() / (Math.pow(10, cb.getVolDecimals())));
+        tv_charge_v.setText(charge_station_vol + "V");
+
+        //充电站电流
+        if (cb.getElSign() > 0)
+            charge_station_elec = (float) (cb.getElectricity() / (Math.pow(10, cb.getElDecimals())));
+        else
+            charge_station_elec = 0 - (float) (cb.getElectricity() / (Math.pow(10, cb.getElDecimals())));
+        tv_charge_elec.setText(charge_station_elec + "A");
+
+        //充电站功率
+        if (cb.getPoSign() > 0)
+            charge_station_power = (float) (cb.getPower() / (Math.pow(10, cb.getPoDecimals())));
+        else
+            charge_station_power = 0 - (float) (cb.getPower() / (Math.pow(10, cb.getPoDecimals())));
+        tv_charge_power.setText(charge_station_power + "W");
+
+        //充电站状态
+        if (cb.getStatus() == 0 || cb.getStatus() == 1) {
+            tv_charge_status.setText("正常工作");
+        }
+        if (cb.getStatus() == 2) {
+            tv_charge_status.setText("过载");
+            tv_charge_status.setTextColor(Color.RED);
+        }
 
     }
 
@@ -108,7 +140,7 @@ public class AgvChargeActivity extends AppCompatActivity {
     protected void onPause() {
         super.onPause();
         EventBus.getDefault().unregister(this);
-        Intent intent = new Intent(AgvChargeActivity.this , ChargeService.class);
+        Intent intent = new Intent(AgvChargeActivity.this, ChargeService.class);
         sendBroadcast(intent);
     }
 

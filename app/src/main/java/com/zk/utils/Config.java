@@ -10,7 +10,7 @@ public class Config {
 
 
     public static String card_ip = "192.168.1.102";
-    public static String server_address = "http://192.168.1.153:8080/sshe/base/agv!notNeedSecurity_agvChargeStatus.sy" ;
+    public static String server_address = "http://192.168.1.137:8080/sshe/base/agv!notNeedSecurity_agvChargeStatus.sy" ;
     public static  int data_index = 0;
     /**
      * 板卡1
