@@ -18,12 +18,7 @@
         android:layout_height="wrap_content"
         android:layout_weight="1" />
 
-    <TextView
-        android:id="@+id/tv_work_zone"
-        style="@style/listItemStyle"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_weight="1" />
+
 
     <TextView
         android:id="@+id/tv_status"

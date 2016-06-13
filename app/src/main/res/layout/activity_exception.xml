@@ -10,15 +10,89 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.zk.robotmonitor.ExceptionActivity">
 
-    <include layout="@layout/list_header" />
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginLeft="@dimen/DIMEN_100PX"
+    android:layout_marginRight="@dimen/DIMEN_100PX"
+    android:orientation="vertical">
 
-    <ListView
+   <LinearLayout
+       android:layout_width="match_parent"
+       android:layout_height="0dp"
+       android:layout_weight="1"
+       android:orientation="horizontal">
+       <LinearLayout
+           android:layout_width="0dp"
+           android:layout_weight="1"
+           android:layout_height="match_parent"
+           android:background="@drawable/corner_no_fill">
+        <com.github.mikephil.charting.charts.PieChart
 
-        android:id="@+id/lv_exception_data"
+            android:id="@+id/piechart_1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        </com.github.mikephil.charting.charts.PieChart>
+
+
+       </LinearLayout>
+       <LinearLayout
+           android:layout_width="0dp"
+           android:layout_weight="1"
+           android:layout_height="match_parent"
+           android:background="@drawable/corner_no_fill">
+           <com.github.mikephil.charting.charts.PieChart
+
+               android:id="@+id/piechart_2"
+               android:layout_width="match_parent"
+               android:layout_height="match_parent">
+
+           </com.github.mikephil.charting.charts.PieChart>
+
+       </LinearLayout>
+
+   </LinearLayout>
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="horizontal">
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:background="@drawable/corner_no_fill">
+            <com.github.mikephil.charting.charts.PieChart
 
-    </ListView>
+                android:id="@+id/piechart_3"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+            </com.github.mikephil.charting.charts.PieChart>
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:background="@drawable/corner_no_fill">
+            <com.github.mikephil.charting.charts.PieChart
+
+                android:id="@+id/piechart_4"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+            </com.github.mikephil.charting.charts.PieChart>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+</LinearLayout>
+
+
 
 
 </LinearLayout>

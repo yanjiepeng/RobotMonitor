@@ -134,7 +134,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:drawableTop="@mipmap/alert"
+                    android:drawableTop="@mipmap/data"
                     android:padding="0dp"
                     android:text="@string/exception" />
 

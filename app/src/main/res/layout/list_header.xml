@@ -21,13 +21,7 @@
         android:gravity="center"
         android:text="简称" />
 
-    <TextView
-        style="@style/headerStyle"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:gravity="center"
-        android:text="工位" />
+
 
     <TextView
         style="@style/headerStyle"

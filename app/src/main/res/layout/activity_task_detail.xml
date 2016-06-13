@@ -82,29 +82,7 @@
 
         </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:orientation="horizontal"
-            android:paddingBottom="@dimen/DIMEN_10PX"
-            android:paddingTop="@dimen/DIMEN_10PX">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:paddingBottom="@dimen/DIMEN_10PX"
-                android:paddingLeft="@dimen/DIMEN_10PX"
-                android:text="@string/auto_refresh"
-                android:textColor="@color/black"
-                android:textSize="@dimen/DIMEN_30PX" />
-
-            <Switch
-                android:id="@+id/sw_auto_refresh"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-
-        </LinearLayout>
 
     </LinearLayout>
 
@@ -128,7 +106,9 @@
         <ListView
             android:id="@+id/lv_task_info"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:transcriptMode="alwaysScroll"
+            >
 
         </ListView>
 

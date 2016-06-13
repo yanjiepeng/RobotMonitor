@@ -1,16 +1,13 @@
 package com.zk.robotmonitor;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Handler;
+import android.os.Message;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.AbsListView;
 import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.ListView;
@@ -21,12 +18,15 @@ import android.widget.Toast;
 import com.zk.adapter.TaskItemAdapter;
 import com.zk.bean.taskbean;
 import com.zk.database.DataService;
+import com.zk.utils.Config;
+import com.zk.utils.FormatUtil;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
-public class TaskDetailActivity extends AppCompatActivity implements AbsListView.OnScrollListener {
+public class TaskDetailActivity extends AppCompatActivity {
 
     private ListView lv_task_detail;
     private TextView tv_device_name, tv_device_version;
@@ -38,13 +38,25 @@ public class TaskDetailActivity extends AppCompatActivity implements AbsListView
     private Handler handler = new Handler();
     private int visibleLastIndex = 0;   //最后的可视项索引
     private int visibleItemCount;       // 当前窗口可见项总数
-    private Switch sw_auto_refresh ;
 
     DataService ds;
     int arg;
     private boolean isLastRow;
     Timer timer;
 
+
+    Handler mHandler = new Handler() {
+
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            if (msg.what == 0) {
+//               TaskItemAdapter adapter =new TaskItemAdapter(TaskDetailActivity.this , data);
+//                lv_task_detail.setAdapter(adapter);
+                mAdapter.notifyDataSetChanged();
+            }
+        }
+    };
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,7 +66,12 @@ public class TaskDetailActivity extends AppCompatActivity implements AbsListView
         initActionBar();
         initWidget();
         initLeftContent();
+        new GenerateDataThread().start();
+        mAdapter = new TaskItemAdapter(this , data);
+        lv_task_detail.setAdapter(mAdapter);
     }
+
+
 
     /*
      初始化左边状态栏及列表内容
@@ -63,6 +80,7 @@ public class TaskDetailActivity extends AppCompatActivity implements AbsListView
 
         Intent i = getIntent();
         arg = i.getIntExtra("deviceID", 0);
+        data = new ArrayList<taskbean>();
         switch (arg) {
 
             case 1:
@@ -96,23 +114,42 @@ public class TaskDetailActivity extends AppCompatActivity implements AbsListView
                 tv_device_version.setText("MJ-Cut-001");
 
         }
-        LayoutInflater lif = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        loadMoreView = lif.inflate(R.layout.load_more, null);
-        loadMoreView.setVisibility(View.INVISIBLE);
-        //----------------------------数据准备--------------------------------
-        ds = new DataService(MainActivity.sqldb);
-        data = ds.getData(arg, last_index);
-        if (data != null && data.size() != 0) {
-            last_index = Integer.parseInt(data.get(data.size() - 1).getId());
-        }
-        //----------------------------------------------------------------------
-
-        lv_task_detail.addFooterView(loadMoreView);
-        mAdapter = new TaskItemAdapter(TaskDetailActivity.this, data);
-        lv_task_detail.setAdapter(mAdapter);
-        lv_task_detail.setOnScrollListener(this);
     }
 
+
+
+    /*
+     此线程用于生成模拟数据
+     */
+    class GenerateDataThread extends Thread {
+        int id = Config.data_index;
+        @Override
+        public void run() {
+            super.run();
+            while (true) {
+                taskbean task = new taskbean();
+                task.setId(id + "");
+                id++;
+                Config.data_index = id;
+                task.setName(tv_device_name.getText().toString());
+                task.setStatus("正常");
+                task.setType("时检");
+                String current_time = FormatUtil.refFormatNowDate();
+                task.setTime(current_time);
+                task.setPeriod(FormatUtil.GettimePeriod(current_time , TaskDetailActivity.this));
+                data.add(task);
+                if (data.size() >= 400) {
+                    data = data.subList(data.size()-400,data.size());
+                }
+                try {
+                    sleep(1000);
+                    mHandler.sendEmptyMessage(0);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
 
     /**
      * 初始化actionbar
@@ -134,7 +171,7 @@ public class TaskDetailActivity extends AppCompatActivity implements AbsListView
         switch (item.getItemId()) {
             case android.R.id.home:// 点击返回图标事件
                 this.finish();
-                if (timer !=null ) {
+                if (timer != null) {
                     timer.cancel();
                 }
             default:
@@ -152,96 +189,17 @@ public class TaskDetailActivity extends AppCompatActivity implements AbsListView
         tv_device_name = (TextView) findViewById(R.id.tv_device_name);
         tv_device_version = (TextView) findViewById(R.id.tv_device_version);
 
-        sw_auto_refresh = (Switch) findViewById(R.id.sw_auto_refresh);
-        sw_auto_refresh.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
 
-                if (isChecked) {
-                    //开启自动刷新
-                    timer= new Timer();
-                    SynchroTimerTask task = new SynchroTimerTask();
-                    timer.schedule(task , 0 , 1000);
-                }else {
-                    //关闭自动刷新
-                    timer.cancel();
-                }
-            }
-        });
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        if (timer!=null) {
+        if (timer != null) {
             timer.cancel();
         }
     }
 
-    /**
-     * 滑动状态改变回调
-     *
-     * @param view
-     * @param scrollState
-     */
 
-    @Override
-    public void onScrollStateChanged(AbsListView view, int scrollState) {
 
-        int itemLastIndex = mAdapter.getCount() - 1; //数据集最后一项的索引
-        int lastIndex = itemLastIndex + 1; //加上footer的总数
-
-        //当滚到最后一行且停止滚动时，执行加载
-        if (isLastRow && scrollState == AbsListView.OnScrollListener.SCROLL_STATE_IDLE) {
-            //加载元素
-            loadMoreView.setVisibility(View.VISIBLE);
-            Log.i("LOADMORE", "loading");
-            //1秒延时
-            handler.postDelayed(new Runnable() {
-                @Override
-                public void run() {
-                    //此处请求下一页的数据
-                    LoadMoreData();
-
-                    last_index = Integer.parseInt(data.get(data.size() - 1).getId());
-                }
-            }, 1000);
-
-        }
-
-    }
-
-    @Override
-    public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
-        this.visibleItemCount = visibleItemCount;
-        visibleLastIndex = firstVisibleItem + visibleItemCount - 1;
-
-        //判断是否滚到最后一行
-        if (firstVisibleItem + visibleItemCount == totalItemCount && totalItemCount > 0) {
-
-            isLastRow = true;
-        }
-    }
-
-    //上拉加载
-    private void LoadMoreData() {
-
-        data.clear();
-        data.addAll(ds.getData(arg, last_index));
-        mAdapter.notifyDataSetChanged();
-    }
-
-    //定时任务
-    class  SynchroTimerTask extends TimerTask {
-
-        @Override
-        public void run() {
-          runOnUiThread(new Runnable() {
-              @Override
-              public void run() {
-                  Toast.makeText(TaskDetailActivity.this, "刷新", 0).show();
-              }
-          });
-        }
-    }
 }

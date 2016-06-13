@@ -8,7 +8,7 @@ import java.util.Map;
 public class EventAA {
 
     public static final int ACTION_SEND_MSG = 1;
-
+    public static final int ACTION_SEND_CHARGE = 2;
     protected String message;
     private Map<String, String> mapMessage;
     protected int actionType;

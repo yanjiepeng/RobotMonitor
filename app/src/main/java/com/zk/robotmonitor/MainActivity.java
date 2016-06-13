@@ -31,13 +31,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         initActionBar();
         initWidget();
 
-//        insertData();
     }
 
 
-     /*
+   /*  *//*
         模拟插入两个异常数据
-     */
+     *//*
     private void insertData() {
         ContentValues values = new ContentValues();
         for (int i = 0; i < 2; i++) {
@@ -51,7 +50,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             values.put("period", "2016-05-30 16:14:26");
             sqldb.insert("device_task", "_id", values);
         }
-    }
+    }*/
 
      /*
         初始化界面控件

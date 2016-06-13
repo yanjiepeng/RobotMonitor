@@ -31,7 +31,9 @@ public class Utils {
         String[] msg = message.substring(1, message.length() - 1).split(",");
         return msg[index];
     }
-
+    /*
+      数据读取
+     */
     public static BatchResults<String> imitateData(ModbusMaster master,
                                                    int slaveID) {
         BatchResults<String> results = null;
@@ -51,36 +53,10 @@ public class Utils {
                                 DataType.TWO_BYTE_INT_UNSIGNED));
 
 
-           /* //读float部分 电表1
+            /*    读float部分 电表1
             batchRead.addLocator(Config.Voltage_Va_1, BaseLocator.holdingRegister(
                     slaveID, 8, DataType.FOUR_BYTE_FLOAT_SWAPPED));
-
-            batchRead.addLocator(Config.Voltage_Vb_1, BaseLocator.holdingRegister(
-                    slaveID, 10, DataType.FOUR_BYTE_FLOAT_SWAPPED));
-
-            batchRead.addLocator(Config.Voltage_Vc_1, BaseLocator
-                    .holdingRegister(slaveID, 12, DataType.FOUR_BYTE_FLOAT_SWAPPED));
-
-            batchRead.addLocator(Config.Voltage_Avg_1, BaseLocator
-                    .holdingRegister(slaveID, 14, DataType.FOUR_BYTE_FLOAT_SWAPPED));
-
-            batchRead.addLocator(Config.Electricity_A_1, BaseLocator
-                    .holdingRegister(slaveID, 16, DataType.FOUR_BYTE_FLOAT_SWAPPED));
-
-            batchRead.addLocator(Config.Electricity_B_1, BaseLocator
-                    .holdingRegister(slaveID, 18, DataType.FOUR_BYTE_FLOAT_SWAPPED));
-
-            batchRead.addLocator(Config.Electricity_C_1, BaseLocator
-                    .holdingRegister(slaveID, 20, DataType.FOUR_BYTE_FLOAT_SWAPPED));
-
-            batchRead.addLocator(Config.Electricity_Avg_1, BaseLocator
-                    .holdingRegister(slaveID, 22, DataType.FOUR_BYTE_FLOAT_SWAPPED));
-
-            batchRead.addLocator(Config.Energy_Positive_1, BaseLocator
-                    .holdingRegister(slaveID, 24, DataType.FOUR_BYTE_INT_UNSIGNED_SWAPPED));
-
-            batchRead.addLocator(Config.Energy_Reverse_1, BaseLocator
-                    .holdingRegister(slaveID, 26, DataType.FOUR_BYTE_INT_UNSIGNED_SWAPPED));*/
+           */
 
         try {
             results = master.send(batchRead);
@@ -95,7 +71,9 @@ public class Utils {
         return results;
     }
 
-
+    /*
+      数据整理 转为Map
+     */
     public static Map<String, String> formatResult(String result) {
         Map<String, String> map = new HashMap();
         String s = result.substring(1, result.length() - 1).trim();
@@ -115,6 +93,7 @@ public class Utils {
         produceData = format.format(curDate);
         return produceData;
     }
+
 
     public static String getOperaStatus(Context context, String mOperaStatus,
                                         ArrayList<Integer> operaStatusList) {
@@ -234,6 +213,9 @@ public class Utils {
 	 * view; }
 	 */
 
+    /*
+      监测apk是否安装
+     */
     public static boolean checkApkExist(Context context, String packageName) {
         if (packageName == null || "".equals(packageName))
             return false;

@@ -3,11 +3,16 @@ package com.zk.robotmonitor;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.animation.TranslateAnimation;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.google.gson.Gson;
+import com.zk.bean.ChargeBean;
 import com.zk.eventBus.EventAA;
+import com.zk.service.ChargeService;
 import com.zk.service.ZkModbusService;
 import com.zk.utils.Config;
 import com.zk.widget.LaunchedBoxView;
@@ -20,6 +25,7 @@ public class AgvChargeActivity extends AppCompatActivity {
 
     private TextView tv_charge_v;
     private LaunchedBoxView lb;
+    private Gson gson;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,9 +33,13 @@ public class AgvChargeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_agv_charge);
         initActionBar();
         initWiget();
+        gson = new Gson();
+
         EventBus.getDefault().register(this);
-        Intent intent = new Intent(this, ZkModbusService.class);
+
+        Intent intent = new Intent(AgvChargeActivity.this , ChargeService.class);
         startService(intent);
+
     }
 
     /*
@@ -72,14 +82,25 @@ public class AgvChargeActivity extends AppCompatActivity {
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onEventMainThread(EventAA eventAA) {
 
-        if (eventAA.getActionType() == EventAA.ACTION_SEND_MSG) {
+        if (eventAA.getActionType() == EventAA.ACTION_SEND_CHARGE) {
 
-            int charge_v = Integer.parseInt(eventAA.getMapMessage().get(Config.Voltage_1));
-            tv_charge_v.setText("电压:" + charge_v + "V");
-
+           String result = eventAA.getMessage();
+            Log.w("result", result);
+            if (result.equals("error")) {
+                Toast.makeText(AgvChargeActivity.this, "网络错误！请检查", Toast.LENGTH_SHORT).show();
+            }else if (result!=null && !result.equals("")) {
+                ChargeBean cb = gson.fromJson(result , ChargeBean.class);
+                UpdataChargeUI(cb);
+            }
         }
 
-        //在此处根据下位agv状态更新界面上消息框的位置以及轨道状态
+    }
+
+    /*
+     此处根据获取的数据对界面进行更新
+     */
+    private void UpdataChargeUI(ChargeBean cb) {
+
 
     }
 
@@ -87,12 +108,21 @@ public class AgvChargeActivity extends AppCompatActivity {
     protected void onPause() {
         super.onPause();
         EventBus.getDefault().unregister(this);
+        Intent intent = new Intent(AgvChargeActivity.this , ChargeService.class);
+        sendBroadcast(intent);
     }
 
+    @Override
+    protected void onStop() {
+        super.onStop();
+        Intent intent = new Intent();
+        intent.setAction("exit");
+        sendBroadcast(intent);
+    }
 
     /*
-      消息框左移动画
-     */
+          消息框左移动画
+         */
     private void AminToLeft() {
 
         TranslateAnimation ta = new TranslateAnimation(0, -900, 0, 0);
