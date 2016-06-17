@@ -25,7 +25,7 @@ public class MyDbHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
 
-        db.execSQL(sql);
+//        db.execSQL(sql);
     }
 
     //数据库升级

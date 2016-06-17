@@ -53,7 +53,7 @@
                 android:id="@+id/tv_charge_voltage"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/DIMEN_100PX"
+                android:layout_marginLeft="@dimen/DIMEN_50PX"
                 android:text="0v"
                 android:textColor="@color/black"
                 android:textSize="@dimen/DIMEN_30PX" />
@@ -81,7 +81,7 @@
                 android:id="@+id/tv_charge_electricity"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/DIMEN_100PX"
+                android:layout_marginLeft="@dimen/DIMEN_50PX"
                 android:textColor="@color/black"
                 android:textSize="@dimen/DIMEN_30PX" />
 
@@ -107,7 +107,7 @@
                 android:id="@+id/tv_charge_power"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/DIMEN_100PX"
+                android:layout_marginLeft="@dimen/DIMEN_50PX"
                 android:textColor="@color/black"
                 android:textSize="@dimen/DIMEN_30PX" />
 
@@ -134,7 +134,7 @@
                 android:id="@+id/tv_charge_status"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/DIMEN_100PX"
+                android:layout_marginLeft="@dimen/DIMEN_50PX"
                 android:textColor="@color/black"
                 android:textSize="@dimen/DIMEN_30PX" />
 
@@ -153,7 +153,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_marginBottom="@dimen/DIMEN_10PX"
+            android:layout_marginBottom="@dimen/DIMEN_5PX"
             android:layout_weight="1.5"
             android:background="@drawable/corner_no_fill"
             android:orientation="vertical">
@@ -221,7 +221,7 @@
                     android:textColor="@color/red" />
 
                 <TextView
-                    android:id="@+id/tv_agv_discharge_voltage"
+                    android:id="@+id/tv_agv_charge_voltage2"
                     style="@style/textChargingStyle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -229,7 +229,7 @@
                     android:text="电压：0v" />
 
                 <TextView
-                    android:id="@+id/tv_agv_discharge_electricity"
+                    android:id="@+id/tv_agv_charge_electricity2"
                     style="@style/textChargingStyle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -237,7 +237,7 @@
                     android:text="电流：0A" />
 
                 <TextView
-                    android:id="@+id/tv_agv_discharge_power"
+                    android:id="@+id/tv_agv_charge_power2"
                     style="@style/textChargingStyle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -268,7 +268,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/DIMEN_150PX"
-                    android:drawableLeft="@mipmap/battery"
+                    android:drawableLeft="@mipmap/battery1"
                     android:text="电池1电量：80%" />
 
                 <TextView
@@ -277,7 +277,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/DIMEN_150PX"
-                    android:drawableLeft="@mipmap/battery"
+                    android:drawableLeft="@mipmap/battery1"
                     android:text="电池2电量：80%" />
             </LinearLayout>
 
@@ -301,14 +301,71 @@
                 android:id="@+id/layout_rail_preview"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@mipmap/rail">
+                android:background="@mipmap/guide">
 
                 <com.zk.widget.LaunchedBoxView
                     android:id="@+id/lb_preview"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_x="@dimen/DIMEN_1000PX"
-                    android:layout_y="@dimen/DIMEN_200PX"></com.zk.widget.LaunchedBoxView>
+                    android:layout_x="@dimen/DIMEN_1100PX"
+                    android:layout_y="@dimen/DIMEN_200PX">
+                </com.zk.widget.LaunchedBoxView>
+                <com.zk.widget.LaunchedBoxView
+                    android:id="@+id/lb_preview2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_x="@dimen/DIMEN_980PX"
+                    android:layout_y="@dimen/DIMEN_200PX">
+                </com.zk.widget.LaunchedBoxView>
+                <com.zk.widget.LaunchedBoxView
+                    android:id="@+id/lb_preview3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_x="@dimen/DIMEN_860PX"
+                    android:layout_y="@dimen/DIMEN_200PX">
+                </com.zk.widget.LaunchedBoxView>
+                <com.zk.widget.LaunchedBoxView
+                    android:id="@+id/lb_preview4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_x="@dimen/DIMEN_740PX"
+                    android:layout_y="@dimen/DIMEN_200PX">
+                </com.zk.widget.LaunchedBoxView>
+                <com.zk.widget.LaunchedBoxView
+                    android:id="@+id/lb_preview5"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_x="@dimen/DIMEN_620PX"
+                    android:layout_y="@dimen/DIMEN_200PX">
+                </com.zk.widget.LaunchedBoxView>
+                <com.zk.widget.LaunchedBoxView
+                    android:id="@+id/lb_preview6"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_x="@dimen/DIMEN_500PX"
+                    android:layout_y="@dimen/DIMEN_200PX">
+                </com.zk.widget.LaunchedBoxView>
+                <com.zk.widget.LaunchedBoxView
+                    android:id="@+id/lb_preview7"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_x="@dimen/DIMEN_380PX"
+                    android:layout_y="@dimen/DIMEN_200PX">
+                </com.zk.widget.LaunchedBoxView>
+                <com.zk.widget.LaunchedBoxView
+                    android:id="@+id/lb_preview8"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_x="@dimen/DIMEN_260PX"
+                    android:layout_y="@dimen/DIMEN_200PX">
+                </com.zk.widget.LaunchedBoxView>
+                <com.zk.widget.LaunchedBoxView
+                    android:id="@+id/lb_preview9"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_x="@dimen/DIMEN_140PX"
+                    android:layout_y="@dimen/DIMEN_200PX">
+                </com.zk.widget.LaunchedBoxView>
 
 
             </AbsoluteLayout>

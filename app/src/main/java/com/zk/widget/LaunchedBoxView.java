@@ -2,6 +2,7 @@ package com.zk.widget;
 
 import android.app.Activity;
 import android.content.Context;
+import android.graphics.Color;
 import android.util.AttributeSet;
 import android.view.View;
 import android.widget.LinearLayout;
@@ -42,24 +43,46 @@ public class LaunchedBoxView extends LinearLayout {
 
     View view;
     TextView tv_message_1;
+    TextView tv_box_title;
 
     private void init(Context context) {
         this.context = context;
         view = ((Activity) context).getLayoutInflater().inflate(
                 R.layout.launched_box, null);
+
         initWidget();
         this.addView(view);
     }
 
     private void initWidget() {
         tv_message_1 = (TextView) view.findViewById(R.id.tv_message_1);
+        tv_box_title = (TextView) view.findViewById(R.id.tv_box_titile);
     }
 
 
     /*
-      设置消息框状态信息
+     设置消息框状态信息
+    */
+    public void setStatusInfo(String msg) {
+        tv_message_1.setText(msg);
+    }
+
+    /*
+     设置消息框状态信息
+    */
+    public void setStatusTextColor(int color) {
+
+        tv_message_1.setTextColor(color);
+    }
+
+    /*
+     设置消息框title背景
      */
-    private void setStatusInfo( String msg ) {
-        tv_message_1.setText("状态:" +msg);
+    public void setStatusColor(int color) {
+        tv_box_title.setBackgroundColor(color);
+    }
+
+    public void setTitle(CharSequence arg) {
+        tv_box_title.setText(arg);
     }
 }

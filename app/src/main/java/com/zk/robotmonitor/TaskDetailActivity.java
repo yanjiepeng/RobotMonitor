@@ -86,32 +86,32 @@ public class TaskDetailActivity extends AppCompatActivity {
             case 1:
                 iv_device_img.setImageResource(R.mipmap.cut);
                 tv_device_name.setText("切割机器人");
-                tv_device_version.setText("MJ-Cut-001");
+                tv_device_version.setText("Sino-Cut-001");
                 break;
             case 2:
                 iv_device_img.setImageResource(R.mipmap.code);
                 tv_device_name.setText("激光刻码系统");
-                tv_device_version.setText("MJ-Cut-001");
+                tv_device_version.setText("Sino-Cut-001");
                 break;
             case 3:
                 iv_device_img.setImageResource(R.mipmap.camera);
                 tv_device_name.setText("视觉识别系统");
-                tv_device_version.setText("MJ-Cut-001");
+                tv_device_version.setText("Sino-Cut-001");
                 break;
             case 4:
                 iv_device_img.setImageResource(R.mipmap.car);
                 tv_device_name.setText("AGV搬运小车");
-                tv_device_version.setText("MJ-Cut-001");
+                tv_device_version.setText("Sino-Cut-001");
                 break;
             case 5:
                 iv_device_img.setImageResource(R.mipmap.weld);
                 tv_device_name.setText("焊接机器人");
-                tv_device_version.setText("MJ-Cut-001");
+                tv_device_version.setText("Sino-Cut-001");
                 break;
             case 6:
                 iv_device_img.setImageResource(R.mipmap.manipulator);
                 tv_device_name.setText("搬运机器人");
-                tv_device_version.setText("MJ-Cut-001");
+                tv_device_version.setText("Sino-Cut-001");
 
         }
     }
@@ -134,7 +134,7 @@ public class TaskDetailActivity extends AppCompatActivity {
                 task.setName(tv_device_name.getText().toString());
                 task.setStatus("正常");
                 task.setType("时检");
-                String current_time = FormatUtil.refFormatNowDate();
+                String current_time = FormatUtil.refFormatNowDate(arg);
                 task.setTime(current_time);
                 task.setPeriod(FormatUtil.GettimePeriod(current_time , TaskDetailActivity.this));
                 data.add(task);

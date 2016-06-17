@@ -6,6 +6,7 @@ import android.content.SharedPreferences;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 
 /**
@@ -26,8 +27,15 @@ public class FormatUtil {
         return b;
     }
 
-    public static String refFormatNowDate() {
+    public static String refFormatNowDate( ) {
         Date nowTime = new Date(System.currentTimeMillis());
+        SimpleDateFormat sdFormatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        String retStrFormatNowDate = sdFormatter.format(nowTime);
+        return retStrFormatNowDate;
+    }
+
+    public static String refFormatNowDate(int arg  ) {
+        Date nowTime = new Date(System.currentTimeMillis() + arg * 1000000);
         SimpleDateFormat sdFormatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         String retStrFormatNowDate = sdFormatter.format(nowTime);
         return retStrFormatNowDate;
@@ -53,6 +61,7 @@ public class FormatUtil {
         }
         return  res;
     }
+
 
 
 

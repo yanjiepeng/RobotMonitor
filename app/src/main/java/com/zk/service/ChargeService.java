@@ -34,7 +34,7 @@ public class ChargeService extends Service {
         IntentFilter intentFilter = new IntentFilter();
         intentFilter.addAction("exit");
         registerReceiver(stopReceiver, intentFilter);
-        timer.schedule(new ChargeTask(),0,500);
+        timer.schedule(new ChargeTask(),0,1000);
         return super.onStartCommand(intent, flags, startId);
     }
 
@@ -48,7 +48,6 @@ public class ChargeService extends Service {
     public void onDestroy() {
         super.onDestroy();
         stopSelf();
-        timer.cancel();
         unregisterReceiver(stopReceiver);
     }
 
@@ -65,7 +64,7 @@ public class ChargeService extends Service {
      */
 
     private void enqueue() {
-        Request request = new Request.Builder().url(Config.server_address).build();
+        Request request = new Request.Builder().url(Config.server_address2).build();
         client.newCall(request).enqueue(new Callback() {
             @Override
             public void onFailure(Request request, IOException e) {
