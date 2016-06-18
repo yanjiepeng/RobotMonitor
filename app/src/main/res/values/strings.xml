@@ -9,7 +9,7 @@
     <string name="carry">搬运机器人</string>
     <string name="exception">数据监测</string>
     <string name="device">当前设备</string>
-    <string name="taskInfo">加工任务情况</string>
+    <string name="taskInfo">设备情况</string>
     <string name="device_name">设备名称:</string>
     <string name="device_version">设备型号:</string>
     <string name="load_more">正在加载</string>

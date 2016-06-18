@@ -1,8 +1,6 @@
 package com.zk.robotmonitor;
 
 import android.content.Intent;
-import android.graphics.Color;
-import android.graphics.drawable.Drawable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -15,7 +13,8 @@ import android.view.animation.TranslateAnimation;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
-import com.zk.bean.ChargeBean;
+import com.google.gson.reflect.TypeToken;
+import com.zk.bean.ChargeEntity;
 import com.zk.eventBus.EventAA;
 import com.zk.service.ChargeService;
 import com.zk.utils.FormatUtil;
@@ -24,7 +23,6 @@ import com.zk.widget.LaunchedBoxView;
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
-import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,12 +32,13 @@ public class AgvChargeActivity extends AppCompatActivity {
     private TextView tv_charge_v, tv_charge_elec, tv_charge_power, tv_charge_status;
     private LaunchedBoxView lb, lb2, lb3, lb4, lb5, lb6, lb7, lb8, lb9;
     private TextView tv_agv_ele_1, tv_agv_ele2, tv_agv_vol_1, tv_agv_vol_2, tv_agv_pw_1, tv_agv_pw_2, tv_battery_1, tv_battery_2;
+    private TextView agv_battery_1_img , agv_battery_2_img;
     private Gson gson;
     char[] chargeNodesStatus = new char[10];
     private List<LaunchedBoxView> lbList;
 
-    List<ChargeBean.ChargeNodesBean> nodesData;
-    private ChargeBean.AgvChargeBean agvData;
+    List<ChargeEntity.ChargeBean.ChargeNodesBean> nodesData;
+    private ChargeEntity.AgvChargeBean agvData;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,6 +69,9 @@ public class AgvChargeActivity extends AppCompatActivity {
         tv_agv_vol_2 = (TextView) findViewById(R.id.tv_agv_charge_voltage2);
         tv_agv_pw_1 = (TextView) findViewById(R.id.tv_agv_charge_power);
         tv_agv_pw_2 = (TextView) findViewById(R.id.tv_agv_charge_power2);
+
+        agv_battery_1_img = (TextView) findViewById(R.id.tv_agv_battery_1_img);
+        agv_battery_2_img = (TextView) findViewById(R.id.tv_agv_battery_2_img);
 
         tv_battery_1 = (TextView) findViewById(R.id.tv_agv_battery_1);
         tv_battery_2 = (TextView) findViewById(R.id.tv_agv_battery_2);
@@ -139,7 +141,8 @@ public class AgvChargeActivity extends AppCompatActivity {
             if (result.equals("error")) {
                 // Toast.makeText(AgvChargeActivity.this, "网络错误！请检查", Toast.LENGTH_SHORT).show();
             } else if (result != null && !result.equals("")) {
-                ChargeBean cb = gson.fromJson(result, ChargeBean.class);
+                java.lang.reflect.Type type = new TypeToken<ChargeEntity>() {}.getType();
+                ChargeEntity cb = gson.fromJson(result, type);
                 UpdataChargeUI(cb);
             }
         }
@@ -149,33 +152,33 @@ public class AgvChargeActivity extends AppCompatActivity {
     /*
      此处根据获取的数据对界面进行更新
      */
-    private void UpdataChargeUI(ChargeBean cb) {
+    private void UpdataChargeUI(ChargeEntity cb) {
         float charge_station_vol, charge_station_elec, charge_station_power, charge_station_status;
         float agv_vol_1, agv_vol_2, agv_ele_1, agv_ele_2, agv_power_1, agv_power_2, bat1, bat2;
 
         //充电站电压
-        if (cb.getVolSign() == 0)
-            charge_station_vol = (float) (cb.getVoltage() / (Math.pow(10, 3 - cb.getVolDecimals())));
+        if (cb.getCharge().getVolSign() == 0)
+            charge_station_vol = (float) (cb.getCharge().getVoltage() / (Math.pow(10, 3 - cb.getCharge().getVolDecimals())));
         else
-            charge_station_vol = 0 - (float) (cb.getVoltage() / (Math.pow(10, 3 - cb.getVolDecimals())));
+            charge_station_vol = 0 - (float) (cb.getCharge().getVoltage() / (Math.pow(10, 3 - cb.getCharge().getVolDecimals())));
         tv_charge_v.setText(charge_station_vol + "V");
 
         //充电站电流
-        if (cb.getElSign() == 0)
-            charge_station_elec = (float) (cb.getElectricity() / (Math.pow(10, 3 - cb.getElDecimals())));
+        if (cb.getCharge().getElSign() == 0)
+            charge_station_elec = (float) (cb.getCharge().getElectricity() / (Math.pow(10, 3 - cb.getCharge().getElDecimals())));
         else
-            charge_station_elec = 0 - (float) (cb.getElectricity() / (Math.pow(10, 3 - cb.getElDecimals())));
+            charge_station_elec = 0 - (float) (cb.getCharge().getElectricity() / (Math.pow(10, 3 - cb.getCharge().getElDecimals())));
         tv_charge_elec.setText(charge_station_elec + "A");
 
         //充电站功率
-        if (cb.getPoSign() == 0)
-            charge_station_power = (float) (cb.getPower() / (Math.pow(10, 3 - cb.getPoDecimals())));
+        if (cb.getCharge().getPoSign() == 0)
+            charge_station_power = (float) (cb.getCharge().getPower() / (Math.pow(10, 3 - cb.getCharge().getPoDecimals())));
         else
-            charge_station_power = 0 - (float) (cb.getPower() / (Math.pow(10, 3 - cb.getPoDecimals())));
+            charge_station_power = 0 - (float) (cb.getCharge().getPower() / (Math.pow(10, 3 - cb.getCharge().getPoDecimals())));
         tv_charge_power.setText(charge_station_power + "W");
 
         //充电站状态
-        int nodesStatus = cb.getStatus();
+        int nodesStatus = cb.getCharge().getStatus();
         String nodes = Integer.toBinaryString(nodesStatus);
         StringBuilder sb = new StringBuilder(nodes);
 
@@ -219,23 +222,22 @@ public class AgvChargeActivity extends AppCompatActivity {
             tv_battery_1.setText("电池1：" + agvData.getBattery_1() / 10 + "%");
             tv_battery_2.setText("电池2：" + agvData.getBattery_2() / 10 + "%");
             if (agv_ele_1 < 0) {
-                Drawable leftDrawable = getResources().getDrawable(R.mipmap.battery_charging);
-                leftDrawable.setBounds(0, 0, leftDrawable.getMinimumWidth(), leftDrawable.getMinimumHeight());
-                tv_battery_1.setCompoundDrawables(leftDrawable, null, null, null);
-
-                startFlick(tv_battery_1);
+                agv_battery_1_img.setBackgroundResource(R.mipmap.battery_charging);
+                stopFlick(agv_battery_1_img);
+                startFlick(agv_battery_1_img);
             }
-            if (agv_ele_2 < 0) {
-                Drawable leftDrawable = getResources().getDrawable(R.mipmap.battery_charging);
-                leftDrawable.setBounds(0, 0, leftDrawable.getMinimumWidth(), leftDrawable.getMinimumHeight());
-                tv_battery_2.setCompoundDrawables(leftDrawable, null, null, null);
-                startFlick(tv_battery_2);
+            else if (agv_ele_2 < 0) {
+                agv_battery_2_img.setBackgroundResource(R.mipmap.battery_charging);
+                stopFlick(agv_battery_2_img);
+                startFlick(agv_battery_2_img);
             }
-            if (agv_ele_1 >= 0) {
+            else if (agv_ele_1 >= 0) {
                 stopFlick(tv_battery_1);
+                agv_battery_1_img.setBackgroundResource(R.mipmap.battery1);
             }
-            if (agv_ele_2 >= 0) {
+            else if (agv_ele_2 >= 0) {
                 stopFlick(tv_battery_2);
+                agv_battery_2_img.setBackgroundResource(R.mipmap.battery1);
             }
 
                 //更新电池数据
@@ -267,8 +269,8 @@ public class AgvChargeActivity extends AppCompatActivity {
                 }
             }
 
-            nodesData = new ArrayList<ChargeBean.ChargeNodesBean>();
-            nodesData = cb.getChargeNodes();
+            nodesData = new ArrayList<ChargeEntity.ChargeBean.ChargeNodesBean>();
+            nodesData = cb.getCharge().getChargeNodes();
             if (nodesData != null && nodesData.size() != 0) {
             /*
             更新节点
@@ -379,6 +381,8 @@ public class AgvChargeActivity extends AppCompatActivity {
         view.startAnimation(alphaAnimation);
 
     }
+
+
 
     /**
      * 取消View闪烁效果

@@ -263,22 +263,30 @@
                     android:textColor="@color/red" />
 
                 <TextView
+                    android:id="@+id/tv_agv_battery_1_img"
+                    android:layout_width="@dimen/DIMEN_80PX"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="@dimen/DIMEN_150PX"
+                    android:background="@mipmap/battery1"/>
+                <TextView
                     android:id="@+id/tv_agv_battery_1"
                     style="@style/textChargingStyle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/DIMEN_150PX"
-                    android:drawableLeft="@mipmap/battery1"
                     android:text="电池1电量：80%" />
 
+                <TextView
+                    android:id="@+id/tv_agv_battery_2_img"
+                    android:layout_width="@dimen/DIMEN_80PX"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="@dimen/DIMEN_150PX"
+                    android:background="@mipmap/battery1"/>
                 <TextView
                     android:id="@+id/tv_agv_battery_2"
                     style="@style/textChargingStyle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/DIMEN_150PX"
-                    android:drawableLeft="@mipmap/battery1"
-                    android:text="电池2电量：80%" />
+                    android:text="电池1电量：80%" />
             </LinearLayout>
 
 

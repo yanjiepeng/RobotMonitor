@@ -1,5 +1,7 @@
 package com.zk.robotmonitor;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Handler;
 import android.os.Message;
@@ -8,6 +10,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.ListView;
@@ -26,7 +29,7 @@ import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
-public class TaskDetailActivity extends AppCompatActivity {
+public class TaskDetailActivity extends AppCompatActivity implements View.OnClickListener, AdapterView.OnItemClickListener {
 
     private ListView lv_task_detail;
     private TextView tv_device_name, tv_device_version;
@@ -91,31 +94,44 @@ public class TaskDetailActivity extends AppCompatActivity {
             case 2:
                 iv_device_img.setImageResource(R.mipmap.code);
                 tv_device_name.setText("激光刻码系统");
-                tv_device_version.setText("Sino-Cut-001");
+                tv_device_version.setText("Sino-QR-001");
                 break;
             case 3:
                 iv_device_img.setImageResource(R.mipmap.camera);
                 tv_device_name.setText("视觉识别系统");
-                tv_device_version.setText("Sino-Cut-001");
+                tv_device_version.setText("Sino-Visual-001");
                 break;
             case 4:
                 iv_device_img.setImageResource(R.mipmap.car);
                 tv_device_name.setText("AGV搬运小车");
-                tv_device_version.setText("Sino-Cut-001");
+                tv_device_version.setText("Sino-AGV-001");
                 break;
             case 5:
                 iv_device_img.setImageResource(R.mipmap.weld);
                 tv_device_name.setText("焊接机器人");
-                tv_device_version.setText("Sino-Cut-001");
+                tv_device_version.setText("Sino-Weld-001");
                 break;
             case 6:
                 iv_device_img.setImageResource(R.mipmap.manipulator);
                 tv_device_name.setText("搬运机器人");
-                tv_device_version.setText("Sino-Cut-001");
+                tv_device_version.setText("Sino-Carrier-001");
 
         }
     }
 
+    @Override
+    public void onClick(View v) {
+
+    }
+
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        if (arg == 2) {
+            startActivity(new Intent(TaskDetailActivity.this , QRCodeActivity.class));
+
+        }
+
+    }
 
 
     /*
@@ -139,7 +155,7 @@ public class TaskDetailActivity extends AppCompatActivity {
                 task.setPeriod(FormatUtil.GettimePeriod(current_time , TaskDetailActivity.this));
                 data.add(task);
                 if (data.size() >= 400) {
-                    data = data.subList(data.size()-400,data.size());
+                    data.clear();
                 }
                 try {
                     sleep(1000);
@@ -189,7 +205,7 @@ public class TaskDetailActivity extends AppCompatActivity {
         tv_device_name = (TextView) findViewById(R.id.tv_device_name);
         tv_device_version = (TextView) findViewById(R.id.tv_device_version);
 
-
+        lv_task_detail.setOnItemClickListener(this);
     }
 
     @Override
