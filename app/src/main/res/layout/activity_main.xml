@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     android:paddingBottom="@dimen/activity_vertical_margin"
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
@@ -11,7 +12,8 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="8"
         android:orientation="horizontal">
 
         <!-- left side -->
@@ -156,5 +158,145 @@
 
     </LinearLayout>
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="@dimen/DIMEN_5PX"
+        android:layout_weight="1"
+     >
 
-</RelativeLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="vertical">
+            <TextView
+                android:id="@+id/proceed_stack_get"
+                style="@style/TextAppearance.AppCompat.Title"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/DIMEN_49PX"
+                android:layout_marginRight="@dimen/DIMEN_2PX"
+                android:layout_marginBottom="@dimen/DIMEN_2PX"
+                android:background="@drawable/corner_cyan"
+                android:gravity="center"
+                android:text="@string/stack_get" />
+                <TextView
+                    android:id="@+id/proceed_stack_put"
+                    style="@style/TextAppearance.AppCompat.Title"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/DIMEN_49PX"
+                    android:layout_marginRight="@dimen/DIMEN_2PX"
+                    android:background="@drawable/corner_cyan"
+                    android:gravity="center"
+                    android:text="@string/stack_putt" />
+            </LinearLayout>
+            <TextView
+                android:id="@+id/proceed_agv_car"
+                style="@style/TextAppearance.AppCompat.Title"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginRight="@dimen/DIMEN_2PX"
+                android:layout_weight="1"
+                android:background="@drawable/corner_cyan"
+                android:gravity="center"
+                android:text="@string/AGV" />
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="vertical">
+                <TextView
+                    android:id="@+id/proceed_carry_get"
+                    style="@style/TextAppearance.AppCompat.Title"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/DIMEN_49PX"
+                    android:layout_marginRight="@dimen/DIMEN_2PX"
+                    android:layout_marginBottom="@dimen/DIMEN_2PX"
+                    android:background="@drawable/corner_cyan"
+                    android:gravity="center"
+                    android:text="@string/get" />
+                <TextView
+                    android:id="@+id/proceed_carry_put"
+                    style="@style/TextAppearance.AppCompat.Title"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/DIMEN_49PX"
+                    android:layout_marginRight="@dimen/DIMEN_2PX"
+                    android:background="@drawable/corner_cyan"
+                    android:gravity="center"
+                    android:text="@string/put" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/proceed_cut"
+                style="@style/TextAppearance.AppCompat.Title"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginRight="@dimen/DIMEN_2PX"
+                android:layout_weight="1"
+                android:background="@drawable/corner_cyan"
+                android:gravity="center"
+                android:text="@string/cut" />
+
+            <TextView
+                android:id="@+id/proceed_vesion"
+                style="@style/TextAppearance.AppCompat.Title"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginRight="@dimen/DIMEN_2PX"
+                android:layout_weight="1"
+                android:background="@drawable/corner_cyan"
+                android:gravity="center"
+                android:text="@string/version" />
+
+            <TextView
+                android:id="@+id/proceed_code"
+                style="@style/TextAppearance.AppCompat.Title"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginRight="@dimen/DIMEN_2PX"
+                android:layout_weight="1"
+                android:background="@drawable/corner_cyan"
+                android:gravity="center"
+                android:text="@string/code" />
+            <TextView
+                android:id="@+id/proceed_scan_code"
+                style="@style/TextAppearance.AppCompat.Title"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginRight="@dimen/DIMEN_2PX"
+                android:layout_weight="1"
+                android:background="@drawable/corner_cyan"
+                android:gravity="center"
+                android:text="扫码" />
+
+            <TextView
+                android:id="@+id/proceed_point_weld"
+                style="@style/TextAppearance.AppCompat.Title"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginRight="@dimen/DIMEN_2PX"
+                android:layout_weight="1"
+                android:background="@drawable/corner_cyan"
+                android:gravity="center"
+                android:text="@string/weld_point" />
+
+            <TextView
+                android:id="@+id/proceed_line_weld"
+                style="@style/TextAppearance.AppCompat.Title"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/corner_cyan"
+                android:gravity="center"
+                android:text="@string/weld_line" />
+
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>

@@ -41,9 +41,14 @@
             </intent-filter>
         </receiver>
 
-        <activity android:name=".QRCodeActivity"
-            android:theme="@style/Base.Theme.AppCompat.Light.Dialog.FixedSize"
-            ></activity>
+        <activity
+            android:name=".QRCodeActivity"
+            android:theme="@style/Base.Theme.AppCompat.Light.Dialog.FixedSize" />
+
+        <service
+            android:name="com.zk.service.UpdateProceedService"
+            android:enabled="true"
+            android:exported="true"></service>
     </application>
 
 </manifest>
