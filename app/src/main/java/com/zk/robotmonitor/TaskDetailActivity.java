@@ -53,7 +53,7 @@ public class TaskDetailActivity extends AppCompatActivity implements View.OnClic
         @Override
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
-            if (msg.what == 0) {
+            if (msg.what == 0 && arg != 3 && arg != 2 ) {
 //               TaskItemAdapter adapter =new TaskItemAdapter(TaskDetailActivity.this , data);
 //                lv_task_detail.setAdapter(adapter);
                 mAdapter.notifyDataSetChanged();
