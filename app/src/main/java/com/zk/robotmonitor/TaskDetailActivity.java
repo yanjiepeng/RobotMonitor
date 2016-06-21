@@ -1,7 +1,5 @@
 package com.zk.robotmonitor;
 
-import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Handler;
 import android.os.Message;
@@ -11,30 +9,33 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.ListView;
-import android.widget.Switch;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.zk.adapter.TaskItemAdapter;
 import com.zk.bean.taskbean;
 import com.zk.database.DataService;
+import com.zk.eventBus.EventQR;
 import com.zk.utils.Config;
 import com.zk.utils.FormatUtil;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Timer;
-import java.util.TimerTask;
 
 public class TaskDetailActivity extends AppCompatActivity implements View.OnClickListener, AdapterView.OnItemClickListener {
 
     private ListView lv_task_detail;
     private TextView tv_device_name, tv_device_version;
     private ImageView iv_device_img;
-    private List<taskbean> data;
+    private  List<taskbean> data;
+    private  List<taskbean> dataQR;
+    private  List<taskbean> dataVersion;
     private View loadMoreView;
     private TaskItemAdapter mAdapter;
     private int last_index = 102;
@@ -54,9 +55,18 @@ public class TaskDetailActivity extends AppCompatActivity implements View.OnClic
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
             if (msg.what == 0 && arg != 3 && arg != 2 ) {
-//               TaskItemAdapter adapter =new TaskItemAdapter(TaskDetailActivity.this , data);
-//                lv_task_detail.setAdapter(adapter);
-                mAdapter.notifyDataSetChanged();
+                mAdapter = new TaskItemAdapter(TaskDetailActivity.this , data);
+                lv_task_detail.setAdapter(mAdapter);
+                lv_task_detail.setSelection(lv_task_detail.getCount());
+
+            }else if (msg.what == 1 && arg == 2) {
+                TaskItemAdapter adapter = new TaskItemAdapter(TaskDetailActivity.this , dataQR);
+                lv_task_detail.setAdapter(adapter);
+                lv_task_detail.setSelection(lv_task_detail.getCount());
+            }else if (msg.what == 1 && arg == 3) {
+                TaskItemAdapter adapter = new TaskItemAdapter(TaskDetailActivity.this , dataVersion);
+                lv_task_detail.setAdapter(adapter);
+                lv_task_detail.setSelection(lv_task_detail.getCount());
             }
         }
     };
@@ -69,9 +79,9 @@ public class TaskDetailActivity extends AppCompatActivity implements View.OnClic
         initActionBar();
         initWidget();
         initLeftContent();
+        EventBus.getDefault().register(this);
         new GenerateDataThread().start();
-        mAdapter = new TaskItemAdapter(this , data);
-        lv_task_detail.setAdapter(mAdapter);
+
     }
 
 
@@ -84,6 +94,8 @@ public class TaskDetailActivity extends AppCompatActivity implements View.OnClic
         Intent i = getIntent();
         arg = i.getIntExtra("deviceID", 0);
         data = new ArrayList<taskbean>();
+        dataQR = new ArrayList<taskbean>();
+        dataVersion = new ArrayList<taskbean>();
         switch (arg) {
 
             case 1:
@@ -127,9 +139,51 @@ public class TaskDetailActivity extends AppCompatActivity implements View.OnClic
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         if (arg == 2) {
-            startActivity(new Intent(TaskDetailActivity.this , QRCodeActivity.class));
-
+            Intent intent = new Intent(TaskDetailActivity.this , QRCodeActivity.class);
+            intent.putExtra("code", dataQR.get(position).getQrCode() );
+            startActivity(intent);
+        }else if (arg == 3) {
+            Intent intent = new Intent(TaskDetailActivity.this , QRCodeActivity.class);
+            intent.putExtra("code", dataVersion.get(position).getQrCode() );
+            startActivity(intent);
         }
+    }
+
+
+    @Subscribe (threadMode = ThreadMode.MAIN)
+    public void GenerateDataQR(EventQR eventQR) {
+        if (eventQR.getMsg().equals("code")) {
+            //生成1条刻码数据
+            taskbean task = new taskbean();
+            task.setId(Config.data_index+"");
+            task.setName("激光刻码系统");
+            task.setTime(FormatUtil.refFormatNowDate(arg));
+            task.setPeriod(FormatUtil.GettimePeriod(FormatUtil.refFormatNowDate(arg), TaskDetailActivity.this));
+            task.setStatus("正常");
+            task.setType("时检");
+            task.setQrCode(eventQR.getQRCode());
+            dataQR.add(task);
+            if (dataQR.size() >= 400) {
+                dataQR.clear();
+            }
+            mHandler.sendEmptyMessage(1);
+        } else if (eventQR.getMsg().equals("version")) {
+            //生成1条视觉检测数据
+            taskbean task = new taskbean();
+            task.setId(Config.data_index+"");
+            task.setName("视觉检测系统");
+            task.setTime(FormatUtil.refFormatNowDate(arg));
+            task.setPeriod(FormatUtil.GettimePeriod(FormatUtil.refFormatNowDate(arg), TaskDetailActivity.this));
+            task.setStatus("正常");
+            task.setType("时检");
+            task.setQrCode(eventQR.getQRCode());
+            dataVersion.add(task);
+            if (dataVersion.size() >= 400) {
+                dataVersion.clear();
+            }
+            mHandler.sendEmptyMessage(2);
+        }
+
 
     }
 
@@ -207,6 +261,8 @@ public class TaskDetailActivity extends AppCompatActivity implements View.OnClic
 
         lv_task_detail.setOnItemClickListener(this);
     }
+
+
 
     @Override
     protected void onDestroy() {

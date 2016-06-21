@@ -16,6 +16,7 @@ import android.widget.TextView;
 
 import com.zk.database.MyDbHelper;
 import com.zk.eventBus.EventP;
+import com.zk.eventBus.EventQR;
 import com.zk.service.UpdateProceedService;
 
 import org.greenrobot.eventbus.EventBus;
@@ -29,7 +30,7 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
     private TextView tv_robot_cut, tv_robot_code, tv_robot_weld, tv_robot_carry, tv_robot_check, tv_robot_agv, tv_data_exception, tv_agv_charge;
-    private TextView tv_proceed_stack_get, tv_proceed_stack_put, tv_proceed_agv_car, tv_proceed_carry_get, tv_proceed_carry_put, tv_proceed_cut, tv_proceed_code,tv_proceed_scan, tv_proceed_version, tv_proceed_point_weld, tv_proceed_line_weld;
+    private TextView tv_proceed_stack_get, tv_proceed_stack_put, tv_proceed_agv_car, tv_proceed_carry_get, tv_proceed_carry_put, tv_proceed_cut, tv_proceed_code, tv_proceed_scan, tv_proceed_version, tv_proceed_point_weld, tv_proceed_line_weld;
     public String DB_NAME = "mjrobot.db";
     public int DB_VERSION = 1;
     public static SQLiteDatabase sqldb;
@@ -222,10 +223,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 case '5':
                     remoivAllAnimation();
                     startFlick(tv_proceed_version);
+                    EventBus.getDefault().post(new EventQR(Integer.valueOf(String.valueOf(status[12])), "version"));
                     break;
                 case '6':
                     remoivAllAnimation();
                     startFlick(tv_proceed_code);
+                    EventBus.getDefault().post(new EventQR(Integer.valueOf(String.valueOf(status[12])), "code"));
                     break;
                 case '7':
                     remoivAllAnimation();

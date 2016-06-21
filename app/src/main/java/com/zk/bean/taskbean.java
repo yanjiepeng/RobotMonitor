@@ -12,8 +12,20 @@ public class taskbean {
     String type;
     String time;
     String period;
+    int qrCode;
 
     public taskbean() {
+    }
+
+    public taskbean(String id, String name, String period, int qrCode, String status, String time, String type, String workzone) {
+        this.id = id;
+        this.name = name;
+        this.period = period;
+        this.qrCode = qrCode;
+        this.status = status;
+        this.time = time;
+        this.type = type;
+        this.workzone = workzone;
     }
 
     public taskbean(String id, String name, String period, String status, String time, String type, String workzone) {
@@ -33,6 +45,14 @@ public class taskbean {
         this.time = time;
         this.type = type;
         this.workzone = workzone;
+    }
+
+    public int getQrCode() {
+        return qrCode;
+    }
+
+    public void setQrCode(int qrCode) {
+        this.qrCode = qrCode;
     }
 
     public String getId() {

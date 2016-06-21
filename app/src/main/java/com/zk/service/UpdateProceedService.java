@@ -27,7 +27,7 @@ public class UpdateProceedService extends Service {
     public UpdateProceedService() {
         client = new OkHttpClient();
         Timer timer = new Timer();
-        timer.schedule(new ProceedTask() , 0 , 500);
+        timer.schedule(new ProceedTask() , 0 , 1000);
     }
 
     @Override
